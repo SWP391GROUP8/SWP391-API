@@ -1,5 +1,7 @@
 package swp391.service.impl;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import swp391.dto.user.CreateUserDto;
@@ -17,6 +19,7 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
     private PasswordEncoder passwordEncoder;
     private RoleRepository roleRepository;
+
 
     public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder, RoleRepository roleRepository) {
         this.userRepository = userRepository;
@@ -71,5 +74,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public void deleteByEmail(String email) {
         userRepository.deleteById(email);
+    }
+
+    public Page<User> findUserWithPaging(int offset, int pageSize){
+        Page<User> users = userRepository.findAll(PageRequest.of(offset,pageSize));
+        return users;
     }
 }

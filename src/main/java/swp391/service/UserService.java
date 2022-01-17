@@ -1,5 +1,6 @@
 package swp391.service;
 
+import org.springframework.data.domain.Page;
 import swp391.dto.user.CreateUserDto;
 import swp391.dto.user.UpdateUserDto;
 import swp391.entity.User;
@@ -18,4 +19,7 @@ public interface UserService {
     User getByEmail(String email);
 
     void deleteByEmail(String email);
+
+    Page<User> findUserWithPaging(int offset, int pageSize);
+
 }
