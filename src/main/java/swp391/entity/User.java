@@ -16,7 +16,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-
+@JsonIgnoreProperties(value = {"applications", "hibernateLazyInitializer"})
 @Table(name = "table_user")
 public class User {
     @Id
@@ -40,6 +40,6 @@ public class User {
     // relationship role - user: 1-N
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "role_id")
-    @JsonIgnoreProperties(value = {"applications", "hibernateLazyInitializer"})
+
     private Role role;
 }

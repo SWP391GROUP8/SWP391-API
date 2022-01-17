@@ -1,10 +1,12 @@
 package swp391.controller;
 
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import swp391.dto.user.CreateUserDto;
+import swp391.dto.user.PagingFormatUserDto;
 import swp391.dto.user.UpdateUserDto;
 import swp391.entity.User;
 import swp391.service.RoleService;
@@ -58,11 +60,17 @@ public class UserController {
         User user = userService.getByEmail(email);
         return ResponseEntity.ok().body(user);
     }
+    @GetMapping("/pagination/{offset}/{pageSize}")
+    public PagingFormatUserDto<Page<User>> getUserWithPaging(@PathVariable int offset, @PathVariable int pageSize){
+        Page<User> productsWithPagination = userService.findUserWithPaging(offset,pageSize);
+        return new PagingFormatUserDto<>(productsWithPagination.getSize(), productsWithPagination);
 
+    }
     @DeleteMapping
     public ResponseEntity deleteUserByEmail(@RequestParam String email) {
         userService.deleteByEmail(email);
         return ResponseEntity.ok("Successful");
     }
+
 
 }

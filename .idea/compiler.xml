@@ -11,7 +11,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="SWP391-API" target="11" />
+      <module name="SWP391-API" target="1.8" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
