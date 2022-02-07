@@ -29,14 +29,19 @@ public class UserController {
     @PostMapping
     public Object createUser(@Valid @RequestBody CreateUserDto dto, BindingResult errors) {
         if (errors.hasErrors()) {
-            //return new ResponseEntity<>(errors.getAllErrors(), HttpStatus.BAD_REQUEST);
             return ResponseEntity.badRequest().body(errors.getAllErrors());
+        }
+        if (!dto.getEmail().matches("^[\\w-\\.]+@fpt[\\.]edu[\\.]vn")) {
+            return ResponseEntity.badRequest().body("Email flow format: ~~~~@fpt.edu.vn");
         }
         if (userService.isExisted(dto.getEmail())) {
             return ResponseEntity.badRequest().body("Email is duplicated");
         }
+        if (!dto.getConfirmPassword().equals(dto.getPassword())) {
+            return ResponseEntity.badRequest().body("Password and confirm password not match");
+        }
         if (!roleService.isExisted(dto.getRoleId())) {
-            return ResponseEntity.badRequest().body("Role id not found");
+            return ResponseEntity.badRequest().body("Role Id not found");
         }
         User user = userService.createUser(dto);
         return ResponseEntity.ok().body(user);
@@ -51,6 +56,9 @@ public class UserController {
 
     @PutMapping
     public ResponseEntity updateUser(@RequestBody UpdateUserDto dto) {
+        if (!roleService.isExisted(dto.getRoleId())) {
+            return ResponseEntity.badRequest().body("Role Id not found");
+        }
         userService.updateUser(dto);
         return ResponseEntity.ok("Successful");
     }
@@ -60,12 +68,14 @@ public class UserController {
         User user = userService.getByEmail(email);
         return ResponseEntity.ok().body(user);
     }
+
     @GetMapping("/pagination/{offset}/{pageSize}")
-    public PagingFormatUserDto<Page<User>> getUserWithPaging(@PathVariable int offset, @PathVariable int pageSize){
-        Page<User> productsWithPagination = userService.findUserWithPaging(offset,pageSize);
+    public PagingFormatUserDto<Page<User>> getUserWithPaging(@PathVariable int offset, @PathVariable int pageSize) {
+        Page<User> productsWithPagination = userService.findUserWithPaging(offset, pageSize);
         return new PagingFormatUserDto<>(productsWithPagination.getSize(), productsWithPagination);
 
     }
+
     @DeleteMapping
     public ResponseEntity deleteUserByEmail(@RequestParam String email) {
         userService.deleteByEmail(email);

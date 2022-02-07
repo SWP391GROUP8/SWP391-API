@@ -5,14 +5,12 @@ import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
 
-import javax.validation.constraints.Email;
 
-import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 @Data
 public class CreateUserDto {
-    @Email(message = "Email not format")
-    @NotNull(message = "Email not blank")
+
+
     private String email;
 
     private String name;
@@ -27,6 +25,7 @@ public class CreateUserDto {
 
     private String password;
 
+    private String confirmPassword;
 
     private String roleId;
 }
