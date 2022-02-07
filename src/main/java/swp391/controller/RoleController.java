@@ -21,6 +21,9 @@ public class RoleController {
 
     @PostMapping
     public ResponseEntity createRole(@RequestBody CreateRoleDto dto) {
+        if(roleService.isExisted(dto.getId())){
+            return ResponseEntity.badRequest().body("Role Id is duplicated");
+        }
         Role role = roleService.createRole(dto);
         return ResponseEntity.ok().body(role);
     }
