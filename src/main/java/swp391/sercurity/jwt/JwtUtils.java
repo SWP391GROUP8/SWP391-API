@@ -28,7 +28,7 @@ public class JwtUtils {
         return Jwts.builder()
                 //.setSubject(userDetails.getUsername())
               // .claim("role",userDetails.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList()))
-                .claim("role",userDetails.getAuthorities())
+                //.claim("role",userDetails.getAuthorities())
                 .setIssuedAt(now)
                 .setExpiration(new Date(now.getTime() + jwtExpiration))
                 .signWith(SignatureAlgorithm.HS512, jwtSecret)

@@ -34,4 +34,28 @@ public class BlogController {
 
         return ResponseEntity.ok().body(blog);
     }
+
+    @PutMapping
+    private ResponseEntity update(@RequestBody ModifiBlogDto dto) {
+        Blog blog = blogService.update(dto.getId(), dto);
+        return ResponseEntity.ok().body(blog);
+    }
+
+    @DeleteMapping()
+    private ResponseEntity delete(@RequestParam String id) {
+        blogService.delete(id);
+        return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/get-by-id")
+    private ResponseEntity getById(@RequestParam String id) {
+        Blog blog = blogService.getById(id);
+        return ResponseEntity.ok().body(blog);
+    }
+
+    @PostMapping("/{blogId}")
+    private ResponseEntity reaction(@PathVariable String blogId) {
+        int numOfReaction = blogService.reaction(blogId);
+        return ResponseEntity.ok().body(numOfReaction);
+    }
 }

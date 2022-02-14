@@ -34,4 +34,9 @@ public class Comment {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "blog_id")
     private Blog blog;
+
+    // relationship course_qa - comment: 1 - N
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "course_qa_id")
+    private Course_QA course_qa;
 }

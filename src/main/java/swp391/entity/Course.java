@@ -35,4 +35,15 @@ public class Course {
     @Builder.Default
     @ManyToMany(mappedBy = "courses", fetch = FetchType.LAZY)
     private Set<Schedule> schedules = new HashSet<>();
+
+    //relationship course - course_qa: 1 - N
+    @OneToMany(mappedBy = "course")
+    @JsonIgnore
+    private Set<Course_QA> course_qa = new HashSet<>();
+
+    // relationship course - course_Resource: 1 - N
+    @OneToMany(mappedBy = "course")
+    @JsonIgnore
+    private Set<Course_Resource> course_resources = new HashSet<>();
+
 }

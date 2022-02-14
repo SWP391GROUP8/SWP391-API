@@ -39,4 +39,21 @@ public class JobPostingController {
 
         return ResponseEntity.ok().body(jobPosting);
     }
+    @PutMapping
+    private ResponseEntity update(@RequestBody ModifiJobPostingDto dto) {
+        JobPosting jobPosting = jobPostingService.update(dto.getId(), dto);
+        return ResponseEntity.ok().body(jobPosting);
+    }
+
+    @DeleteMapping()
+    private ResponseEntity delete(@RequestParam String id) {
+        jobPostingService.delete(id);
+        return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/get-by-id")
+    private ResponseEntity getById(@RequestParam String id) {
+        JobPosting jobPosting = jobPostingService.getById(id);
+        return ResponseEntity.ok().body(jobPosting);
+    }
 }

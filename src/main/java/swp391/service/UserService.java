@@ -22,4 +22,5 @@ public interface UserService {
 
     Page<User> findUserWithPaging(int offset, int pageSize);
 
+    boolean findByScheduleIdAndUserId(String scheduleId, String userId);
 }
