@@ -80,4 +80,9 @@ public class UserServiceImpl implements UserService {
         Page<User> users = userRepository.findAll(PageRequest.of(offset,pageSize));
         return users;
     }
+
+    @Override
+    public boolean findByScheduleIdAndUserId(String scheduleId, String userId) {
+        return userRepository.findUserByScheduleIdAndUserId(scheduleId,userId)>=1;
+    }
 }

@@ -39,4 +39,25 @@ public class JobPostingServiceImpl implements JobPostingService {
         jobPosting.setUser(userRepository.getById(dto.getUserId()));
         return jobPostingRepository.save(jobPosting);
     }
+
+    @Override
+    public JobPosting update(String id, ModifiJobPostingDto dto) {
+        JobPosting jobPosting =jobPostingRepository.getById(id);
+        jobPosting.setTitle(dto.getTitle());
+        jobPosting.setContent(dto.getContent());
+        jobPosting.setCreateDate(LocalDate.now());
+        jobPosting.setStatus(dto.getStatus());
+        jobPosting.setUser(userRepository.getById(dto.getUserId()));
+        return jobPostingRepository.save(jobPosting);
+    }
+
+    @Override
+    public void delete(String id) {
+        jobPostingRepository.deleteById(id);
+    }
+
+    @Override
+    public JobPosting getById(String id) {
+        return jobPostingRepository.getById(id);
+    }
 }

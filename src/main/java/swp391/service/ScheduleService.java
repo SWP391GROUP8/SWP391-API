@@ -1,5 +1,6 @@
 package swp391.service;
 
+import swp391.dto.schedule.AddUserDto;
 import swp391.dto.schedule.CreateScheduleDto;
 import swp391.entity.Schedule;
 
@@ -17,4 +18,6 @@ public interface ScheduleService {
     void delete(String id);
 
     Schedule getById(String id);
+
+    void addUser(AddUserDto dto);
 }

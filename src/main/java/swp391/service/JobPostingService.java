@@ -11,4 +11,10 @@ public interface JobPostingService {
     boolean isExisted(String id);
 
     JobPosting create(ModifiJobPostingDto dto);
+
+    JobPosting update(String id, ModifiJobPostingDto dto);
+
+    void delete(String id);
+
+    JobPosting getById(String id);
 }

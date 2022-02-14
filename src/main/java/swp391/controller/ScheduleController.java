@@ -1,11 +1,16 @@
 package swp391.controller;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import swp391.dto.schedule.AddUserDto;
 import swp391.dto.schedule.CreateScheduleDto;
-import swp391.entity.Course;
+
 import swp391.entity.Schedule;
 import swp391.service.ScheduleService;
+import swp391.service.UserService;
+
 
 import java.util.List;
 
@@ -13,9 +18,13 @@ import java.util.List;
 @RequestMapping("/api/schedule")
 public class ScheduleController {
     private ScheduleService scheduleService;
-    public ScheduleController(ScheduleService scheduleService){
-        this.scheduleService=scheduleService;
+    private UserService userService;
+
+    public ScheduleController(ScheduleService scheduleService,UserService userService) {
+        this.scheduleService = scheduleService;
+        this.userService=userService;
     }
+
     @PostMapping
     public ResponseEntity create(@RequestBody CreateScheduleDto dto) {
         if (scheduleService.isExisted(dto.getId())) {
@@ -48,5 +57,20 @@ public class ScheduleController {
     private ResponseEntity getById(@RequestParam String id) {
         Schedule schedule = scheduleService.getById(id);
         return ResponseEntity.ok().body(schedule);
+    }
+
+    @PostMapping("/add-user")
+    public Object addUserToSchedule(@RequestBody AddUserDto dto) {
+        if(!scheduleService.isExisted(dto.getScheduleId())){
+            return ResponseEntity.badRequest().body("Schedule Id is not found");
+        }
+        for (int i = 0; i < dto.getUserIdList().size(); i++) {
+            String userId = dto.getUserIdList().get(i);
+            if (userService.findByScheduleIdAndUserId(dto.getScheduleId(), userId)) {
+                return ResponseEntity.badRequest().body("Email: " + userId + " is existed in this schedule.") ;
+            }
+        }
+        scheduleService.addUser(dto);
+        return ResponseEntity.ok().body("Add successful");
     }
 }

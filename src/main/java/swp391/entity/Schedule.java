@@ -53,6 +53,10 @@ public class Schedule {
     @JoinTable(name = "schedule_course", joinColumns = @JoinColumn(name = "schedule_id"), inverseJoinColumns = @JoinColumn(name = "course_id"))
     private Set<Course>  courses= new HashSet<>();
 
-
+    //helper
+    public void addUser(User user) {
+        users.add(user);
+        user.getSchedules().add(this);
+    }
 
 }

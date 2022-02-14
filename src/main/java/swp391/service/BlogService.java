@@ -12,4 +12,12 @@ public interface BlogService {
     boolean isExisted(String id);
 
     Blog create(ModifiBlogDto dto);
+
+    Blog update(String id, ModifiBlogDto dto);
+
+    void delete(String id);
+
+    Blog getById(String id);
+
+    int reaction(String blogId);
 }
