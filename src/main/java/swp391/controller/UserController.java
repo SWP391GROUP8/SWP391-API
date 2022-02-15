@@ -40,9 +40,9 @@ public class UserController {
         if (!dto.getConfirmPassword().equals(dto.getPassword())) {
             return ResponseEntity.badRequest().body("Password and confirm password not match");
         }
-//        if (!roleService.isExisted(dto.getRoleId())) {
-//            return ResponseEntity.badRequest().body("Role Id not found");
-//        }
+        if (!roleService.isExisted(dto.getRoleId())) {
+            return ResponseEntity.badRequest().body("Role Id not found");
+        }
         User user = userService.createUser(dto);
         return ResponseEntity.ok().body(user);
     }
