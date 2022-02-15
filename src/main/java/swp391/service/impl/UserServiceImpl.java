@@ -31,10 +31,6 @@ public class UserServiceImpl implements UserService {
     public User createUser(CreateUserDto dto) {
         User user = new User();
         user.setEmail(dto.getEmail());
-        user.setName(dto.getName());
-        user.setBirthDay(dto.getBirthDay());
-        user.setPhone(dto.getPhone());
-        user.setAddress(dto.getAddress());
         user.setPassword(passwordEncoder.encode(dto.getPassword()));
         user.setStatus("ACTIVE");
         Role role = roleRepository.findById(dto.getRoleId()).get();

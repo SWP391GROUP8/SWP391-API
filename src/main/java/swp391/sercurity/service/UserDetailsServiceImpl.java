@@ -12,6 +12,7 @@ import swp391.entity.User;
 import swp391.repository.UserRepository;
 import swp391.sercurity.dto.UserDetailsDto;
 
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -30,6 +31,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         User user = repository.findByEmailAndStatus(email,status);
 
         Set<GrantedAuthority> authorities = getAuthorities(user.getRole());
+
         return new UserDetailsDto(email, user.getPassword(), authorities);
     }
 
