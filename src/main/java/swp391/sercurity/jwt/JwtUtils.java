@@ -12,6 +12,7 @@ import org.springframework.util.StringUtils;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 import java.util.stream.Collectors;
+
 @Component
 public class JwtUtils {
     private static final Logger logger = LoggerFactory.getLogger(Jwts.class);
@@ -26,8 +27,8 @@ public class JwtUtils {
         Date now = new Date();
 
         return Jwts.builder()
-                //.setSubject(userDetails.getUsername())
-              // .claim("role",userDetails.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList()))
+                .setSubject(userDetails.getUsername())
+                // .claim("role",userDetails.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList()))
                 //.claim("role",userDetails.getAuthorities())
                 .setIssuedAt(now)
                 .setExpiration(new Date(now.getTime() + jwtExpiration))
@@ -41,7 +42,7 @@ public class JwtUtils {
             Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token);
             return true;
         } catch (Exception e) {
-           e.printStackTrace();
+            e.printStackTrace();
         }
 
         return false;
@@ -50,7 +51,7 @@ public class JwtUtils {
     public String getJwtTokenFromRequest(HttpServletRequest request) {
         String header = request.getHeader(authHeader);
 
-        if(StringUtils.hasText(header) && header.startsWith(tokenPrefix))
+        if (StringUtils.hasText(header) && header.startsWith(tokenPrefix))
             return header.substring(tokenPrefix.length(), header.length());
 
         return null;
