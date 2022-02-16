@@ -78,7 +78,7 @@ public class AuthController {
 
     public static ResponseEntity<Object> getResponse(Object token, Object role, HttpStatus status) {
         Map<String, Object> map = new HashMap<>();
-        map.put("content", token);
+        map.put("token", token);
         map.put("role", role);
         map.put("status", status.value());
 
