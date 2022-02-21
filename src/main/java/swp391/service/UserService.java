@@ -23,4 +23,12 @@ public interface UserService {
     Page<User> findUserWithPaging(int offset, int pageSize);
 
     boolean findByScheduleIdAndUserId(String scheduleId, String userId);
+
+ 
+
+    User findByEmail(String id);
+
+    boolean checkIfValidOldPassword(User user, String oldPassword);
+
+    void changePassword(User user, String newPassword);
 }

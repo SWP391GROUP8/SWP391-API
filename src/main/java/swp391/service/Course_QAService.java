@@ -9,13 +9,13 @@ import java.util.List;
 public interface Course_QAService {
     List<Course_QA> getAll();
 
-    boolean isExisted(String id);
+    boolean isExisted(Long id);
 
     Course_QA create(ModifiCourse_qa dto);
 
-    Course_QA update(String id, ModifiCourse_qa dto);
+    Course_QA update(Long id, ModifiCourse_qa dto);
 
-    void delete(String id);
+    void delete(Long id);
 
-    Course_QA getById(String id);
+    Course_QA getById(Long id);
 }

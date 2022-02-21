@@ -19,10 +19,9 @@ import java.util.Set;
 @Entity
 @Table(name = "tbl_courseqa")
 public class Course_QA {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    private Long id;
     @Column
     private String title;
     @Column

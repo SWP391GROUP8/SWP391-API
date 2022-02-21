@@ -1,10 +1,11 @@
 package swp391.controller;
 
 import org.springframework.data.domain.Page;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import swp391.dto.user.ChangePasswordDto;
 import swp391.dto.user.CreateUserDto;
 import swp391.dto.user.PagingFormatUserDto;
 import swp391.dto.user.UpdateUserDto;
@@ -82,5 +83,19 @@ public class UserController {
         return ResponseEntity.ok("Successful");
     }
 
+    @PostMapping("/change-password")
+    public ResponseEntity changPassword(ChangePasswordDto passwordDto) {
+        // xac dinh user sau khi dang nhap
+        //User user = userService.findByEmail(((User) SecurityContextHolder.getContext().getAuthentication().get).getEmail());
+        User user = userService.findByEmail(passwordDto.getEmail());
+        if (!userService.checkIfValidOldPassword(user, passwordDto.getOldPassword())) {
+            return ResponseEntity.badRequest().body("Old password is wrong");
+        }
+        if(!passwordDto.getNewPassword().equals(passwordDto.getComfirmNewPassword())){
+            return ResponseEntity.badRequest().body("New password not matches");
+        }
+        userService.changePassword(user, passwordDto.getNewPassword());
+        return ResponseEntity.ok("Successful !");
+    }
 
 }
