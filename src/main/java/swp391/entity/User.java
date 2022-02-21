@@ -35,7 +35,7 @@ public class User {
     @Column
     private String address;
     @Column
-    @JsonIgnore
+//    @JsonIgnore
     private String password;
     @Column
     private String status;

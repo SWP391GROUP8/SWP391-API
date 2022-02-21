@@ -51,13 +51,13 @@ public class Course_QAController {
     }
 
     @DeleteMapping()
-    private ResponseEntity delete(@RequestParam String id) {
+    private ResponseEntity delete(@RequestParam Long id) {
         course_qaService.delete(id);
         return ResponseEntity.ok().build();
     }
 
     @GetMapping("/get-by-id")
-    private ResponseEntity getById(@RequestParam String id) {
+    private ResponseEntity getById(@RequestParam Long id) {
         Course_QA course_qa = course_qaService.getById(id);
         return ResponseEntity.ok().body(course_qa);
     }

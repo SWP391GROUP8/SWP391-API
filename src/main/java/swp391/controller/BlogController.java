@@ -58,4 +58,10 @@ public class BlogController {
         int numOfReaction = blogService.reaction(blogId);
         return ResponseEntity.ok().body(numOfReaction);
     }
+
+    @GetMapping("/ranking")
+    private ResponseEntity ranking() {
+        List<Blog> blogList = blogService.ranking();
+        return ResponseEntity.ok().body(blogList);
+    }
 }

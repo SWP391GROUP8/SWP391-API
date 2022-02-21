@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
+
 @Builder
 @Data
 @NoArgsConstructor
@@ -45,5 +46,12 @@ public class Course {
     @OneToMany(mappedBy = "course")
     @JsonIgnore
     private Set<Course_Resource> course_resources = new HashSet<>();
+
+    // relationship course - file: N - N
+    @JsonIgnore
+    @Builder.Default
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinTable(name = "course_file", joinColumns = @JoinColumn(name = "course_id"), inverseJoinColumns = @JoinColumn(name = "file_id"))
+    private Set<File> files = new HashSet<>();
 
 }

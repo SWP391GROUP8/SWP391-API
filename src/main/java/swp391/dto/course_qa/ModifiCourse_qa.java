@@ -7,7 +7,7 @@ import lombok.Data;
 @Data
 public class ModifiCourse_qa {
 
-    private String id;
+    private Long id;
 
     private String title;
 

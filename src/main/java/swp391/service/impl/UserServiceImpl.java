@@ -55,9 +55,9 @@ public class UserServiceImpl implements UserService {
         user.setBirthDay(dto.getBirthDay());
         user.setPhone(dto.getPhone());
         user.setAddress(dto.getAddress());
-        user.setPassword(passwordEncoder.encode(dto.getPassword()));
+       // user.setPassword(passwordEncoder.encode(dto.getPassword()));
         user.setStatus(dto.getStatus());
-        Role role = roleRepository.findById(dto.getRoleId()).get();
+        Role role = roleRepository.getById(dto.getRoleId());
         user.setRole(role);
         userRepository.save(user);
     }
@@ -80,5 +80,23 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean findByScheduleIdAndUserId(String scheduleId, String userId) {
         return userRepository.findUserByScheduleIdAndUserId(scheduleId,userId)>=1;
+    }
+
+
+
+    @Override
+    public User findByEmail(String id) {
+        return userRepository.getById(id);
+    }
+
+    @Override
+    public boolean checkIfValidOldPassword(User user, String oldPassword) {
+        return passwordEncoder.matches(oldPassword,user.getPassword()) ;
+    }
+
+    @Override
+    public void changePassword(User user, String newPassword) {
+        user.setPassword(passwordEncoder.encode(newPassword));
+        userRepository.save(user);
     }
 }

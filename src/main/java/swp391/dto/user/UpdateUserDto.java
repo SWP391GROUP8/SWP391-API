@@ -22,7 +22,7 @@ public class UpdateUserDto {
 
     private String address;
 
-    private String password;
+   // private String password;
 
     private String status;
 

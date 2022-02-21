@@ -24,7 +24,7 @@ public class Course_QAServiceImpl implements Course_QAService {
     }
 
     @Override
-    public boolean isExisted(String id) {
+    public boolean isExisted(Long id) {
         return course_qaRepository.existsById(id);
     }
 
@@ -39,7 +39,7 @@ public class Course_QAServiceImpl implements Course_QAService {
     }
 
     @Override
-    public Course_QA update(String id, ModifiCourse_qa dto) {
+    public Course_QA update(Long id, ModifiCourse_qa dto) {
         Course_QA course_qa = course_qaRepository.getById(id);
 
         course_qa.setTitle(dto.getTitle());
@@ -50,12 +50,12 @@ public class Course_QAServiceImpl implements Course_QAService {
     }
 
     @Override
-    public void delete(String id) {
+    public void delete(Long id) {
         course_qaRepository.deleteById(id);
     }
 
     @Override
-    public Course_QA getById(String id) {
+    public Course_QA getById(Long id) {
         return course_qaRepository.getById(id);
     }
 }

@@ -20,4 +20,6 @@ public interface BlogService {
     Blog getById(String id);
 
     int reaction(String blogId);
+
+    List<Blog> ranking();
 }

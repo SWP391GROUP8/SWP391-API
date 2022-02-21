@@ -67,4 +67,10 @@ public class BlogServiceImpl implements BlogService {
         blogRepository.save(blog);
         return blog.getReaction();
     }
+
+    @Override
+    public List<Blog> ranking() {
+        return blogRepository.countMostBlogsByReaction();
+
+    }
 }

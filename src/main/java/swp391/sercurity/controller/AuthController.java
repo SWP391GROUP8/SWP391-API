@@ -63,7 +63,6 @@ public class AuthController {
         try {
             Authentication auth = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(dto.getEmail(), dto.getPassword()));
-
             SecurityContextHolder.getContext().setAuthentication(auth);
             String token = jwtUtils.generateJwtToken(auth);
             String role = roleRepository.getRoleByEmail(dto.getEmail());
@@ -72,7 +71,6 @@ public class AuthController {
         } catch (Exception e) {
             logger.debug("{} has been logged in with wrong password: {}", dto.getEmail(), e.getMessage());
         }
-
         return ResponseEntity.badRequest().body("Invalid password");
     }
 
@@ -81,7 +79,6 @@ public class AuthController {
         map.put("token", token);
         map.put("role", role);
         map.put("status", status.value());
-
         return new ResponseEntity<Object>(map, status);
     }
 }
