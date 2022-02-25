@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+
 import java.time.LocalDate;
 
 @Data
@@ -29,6 +30,14 @@ public class JobPosting {
     private LocalDate createDate;
     @Column
     private String status;
+    @Column
+    private String city;
+    @Column
+    private String address;
+    @Column
+    private String mail;
+    @Column
+    private String phoneNumber;
 
     //relationship user - job posting: 1 - N
     @ManyToOne(fetch = FetchType.LAZY)

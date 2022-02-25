@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.*;
 import swp391.dto.blog.ModifiBlogDto;
 
 import swp391.dto.course_qa.ModifiCourse_qa;
+import swp391.dto.course_qa.UpdateCourse_qa;
 import swp391.entity.Course_QA;
 import swp391.service.CourseService;
 import swp391.service.Course_QAService;
@@ -30,9 +31,7 @@ public class Course_QAController {
 
     @PostMapping
     public ResponseEntity create(@RequestBody ModifiCourse_qa dto) {
-        if (course_qaService.isExisted(dto.getId())) {
-            return ResponseEntity.badRequest().body("Course_QA Id is duplicated");
-        }
+
         if (!courseService.isExisted(dto.getCourseId())) {
             return ResponseEntity.badRequest().body("Course Id is not found");
         }
@@ -42,7 +41,7 @@ public class Course_QAController {
     }
 
     @PutMapping
-    private ResponseEntity update(@RequestBody ModifiCourse_qa dto) {
+    private ResponseEntity update(@RequestBody UpdateCourse_qa dto) {
         if (!courseService.isExisted(dto.getCourseId())) {
             return ResponseEntity.badRequest().body("Course Id is not found");
         }

@@ -19,7 +19,8 @@ import java.util.Set;
 public class Blog {
     @Column
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     @Column
     private String title;
     @Column

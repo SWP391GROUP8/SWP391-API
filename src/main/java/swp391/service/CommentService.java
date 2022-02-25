@@ -10,5 +10,9 @@ public interface CommentService {
 
     Comment create(ModifiCommentDto dto);
 
-    void delete(String id);
+    void delete(Long id);
+
+    List<Comment> getByBlogID(Long blogId);
+
+    List<Comment> getByQAId(Long qaId);
 }

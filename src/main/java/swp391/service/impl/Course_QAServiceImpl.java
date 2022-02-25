@@ -3,6 +3,7 @@ package swp391.service.impl;
 import org.springframework.stereotype.Service;
 
 import swp391.dto.course_qa.ModifiCourse_qa;
+import swp391.dto.course_qa.UpdateCourse_qa;
 import swp391.entity.Course_QA;
 import swp391.repository.CourseRepository;
 import swp391.repository.Course_qaRepository;
@@ -31,7 +32,7 @@ public class Course_QAServiceImpl implements Course_QAService {
     @Override
     public Course_QA create(ModifiCourse_qa dto) {
         Course_QA course_qa = new Course_QA();
-        course_qa.setId(dto.getId());
+
         course_qa.setTitle(dto.getTitle());
         course_qa.setContent(dto.getContent());
         course_qa.setCourse(courseRepository.getById(dto.getCourseId()));
@@ -39,7 +40,7 @@ public class Course_QAServiceImpl implements Course_QAService {
     }
 
     @Override
-    public Course_QA update(Long id, ModifiCourse_qa dto) {
+    public Course_QA update(Long id, UpdateCourse_qa dto) {
         Course_QA course_qa = course_qaRepository.getById(id);
 
         course_qa.setTitle(dto.getTitle());
