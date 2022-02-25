@@ -2,10 +2,9 @@ package swp391.dto.blog;
 
 import lombok.Data;
 
-
-
 @Data
-public class ModifiBlogDto {
+public class UpdateBlogDto {
+    private Long id;
 
     private String title;
 

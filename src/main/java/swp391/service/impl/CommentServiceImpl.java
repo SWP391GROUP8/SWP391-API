@@ -5,8 +5,10 @@ import swp391.dto.comment.ModifiCommentDto;
 import swp391.entity.Comment;
 import swp391.repository.BlogRepository;
 import swp391.repository.CommentRepository;
+import swp391.repository.Course_qaRepository;
 import swp391.repository.UserRepository;
 import swp391.service.CommentService;
+import swp391.service.Course_QAService;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -16,11 +18,13 @@ public class CommentServiceImpl implements CommentService {
     private CommentRepository commentRepository;
     private UserRepository userRepository;
     private BlogRepository blogRepository;
+    private Course_qaRepository course_qaRepository;
 
-    public CommentServiceImpl(CommentRepository commentRepository, UserRepository userRepository,BlogRepository blogRepository) {
+    public CommentServiceImpl( Course_qaRepository course_qaRepository,CommentRepository commentRepository, UserRepository userRepository,BlogRepository blogRepository) {
         this.commentRepository = commentRepository;
         this.userRepository = userRepository;
         this.blogRepository=blogRepository;
+        this.course_qaRepository=course_qaRepository;
     }
 
     @Override
@@ -35,11 +39,22 @@ public class CommentServiceImpl implements CommentService {
         comment.setUser(userRepository.getById(dto.getUserId()));
         comment.setCreateDate(LocalDate.now());
         comment.setBlog(blogRepository.getById(dto.getBlogId()));
+        comment.setCourse_qa(course_qaRepository.getById(dto.getCouurse_qaId()));
         return commentRepository.save(comment);
     }
 
     @Override
-    public void delete(String id) {
+    public void delete(Long id) {
         commentRepository.deleteById(id);
+    }
+
+    @Override
+    public List<Comment> getByBlogID(Long blogId) {
+        return commentRepository.getCommentsByBlog_Id(blogId);
+    }
+
+    @Override
+    public List<Comment> getByQAId(Long qaId) {
+        return commentRepository.getCommentsByQAId(qaId);
     }
 }

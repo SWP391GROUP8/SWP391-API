@@ -38,9 +38,19 @@ public class CommentController {
     }
 
     @DeleteMapping
-    public ResponseEntity delete(@RequestParam String id) {
+    public ResponseEntity delete(@RequestParam Long id) {
         commentService.delete(id);
         return ResponseEntity.ok("Successful");
+    }
+    @GetMapping("/get-by-blogId")
+    public ResponseEntity getByBlogId(@RequestParam Long blogId){
+        List<Comment> commentList = commentService.getByBlogID(blogId);
+        return ResponseEntity.ok(commentList);
+    }
+    @GetMapping("/get-by-course-qaId")
+    public ResponseEntity getByCourseQAId(@RequestParam Long qaId){
+        List<Comment> commentList = commentService.getByQAId(qaId);
+        return ResponseEntity.ok(commentList);
     }
 
 }

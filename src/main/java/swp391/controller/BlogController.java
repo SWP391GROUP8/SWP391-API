@@ -3,6 +3,7 @@ package swp391.controller;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import swp391.dto.blog.ModifiBlogDto;
+import swp391.dto.blog.UpdateBlogDto;
 import swp391.dto.course.CreateCourseDto;
 import swp391.entity.Blog;
 import swp391.entity.Course;
@@ -27,34 +28,32 @@ public class BlogController {
 
     @PostMapping
     public ResponseEntity create(@RequestBody ModifiBlogDto dto) {
-        if (blogService.isExisted(dto.getId())) {
-            return ResponseEntity.badRequest().body("Blog Id is duplicated");
-        }
+
         Blog blog = blogService.create(dto);
 
         return ResponseEntity.ok().body(blog);
     }
 
     @PutMapping
-    private ResponseEntity update(@RequestBody ModifiBlogDto dto) {
+    private ResponseEntity update(@RequestBody UpdateBlogDto dto) {
         Blog blog = blogService.update(dto.getId(), dto);
         return ResponseEntity.ok().body(blog);
     }
 
     @DeleteMapping()
-    private ResponseEntity delete(@RequestParam String id) {
+    private ResponseEntity delete(@RequestParam Long id) {
         blogService.delete(id);
         return ResponseEntity.ok().build();
     }
 
     @GetMapping("/get-by-id")
-    private ResponseEntity getById(@RequestParam String id) {
+    private ResponseEntity getById(@RequestParam Long id) {
         Blog blog = blogService.getById(id);
         return ResponseEntity.ok().body(blog);
     }
 
     @PostMapping("/{blogId}")
-    private ResponseEntity reaction(@PathVariable String blogId) {
+    private ResponseEntity reaction(@PathVariable Long blogId) {
         int numOfReaction = blogService.reaction(blogId);
         return ResponseEntity.ok().body(numOfReaction);
     }

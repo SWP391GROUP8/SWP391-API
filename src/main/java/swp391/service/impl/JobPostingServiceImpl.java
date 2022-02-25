@@ -36,6 +36,10 @@ public class JobPostingServiceImpl implements JobPostingService {
         jobPosting.setContent(dto.getContent());
         jobPosting.setCreateDate(LocalDate.now());
         jobPosting.setStatus(dto.getStatus());
+        jobPosting.setCity(dto.getCity());
+        jobPosting.setAddress(dto.getAddress());
+        jobPosting.setMail(dto.getMail());
+        jobPosting.setPhoneNumber(dto.getPhoneNumber());
         jobPosting.setUser(userRepository.getById(dto.getUserId()));
         return jobPostingRepository.save(jobPosting);
     }
@@ -47,6 +51,10 @@ public class JobPostingServiceImpl implements JobPostingService {
         jobPosting.setContent(dto.getContent());
         jobPosting.setCreateDate(LocalDate.now());
         jobPosting.setStatus(dto.getStatus());
+        jobPosting.setCity(dto.getCity());
+        jobPosting.setAddress(dto.getAddress());
+        jobPosting.setMail(dto.getMail());
+        jobPosting.setPhoneNumber(dto.getPhoneNumber());
         jobPosting.setUser(userRepository.getById(dto.getUserId()));
         return jobPostingRepository.save(jobPosting);
     }

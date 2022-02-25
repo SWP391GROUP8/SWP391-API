@@ -3,7 +3,8 @@ package swp391.dto.comment;
 import lombok.Data;
 
 @Data
-public class ModifiCommentDto {
+public class UpdateCommentDto {
+    private Long id;
     private String content;
     private String userId;
     private Long blogId;
