@@ -39,7 +39,8 @@ public class CommentServiceImpl implements CommentService {
         comment.setUser(userRepository.getById(dto.getUserId()));
         comment.setCreateDate(LocalDate.now());
         comment.setBlog(blogRepository.getById(dto.getBlogId()));
-        comment.setCourse_qa(course_qaRepository.getById(dto.getCouurse_qaId()));
+        comment.setCourse_qa(course_qaRepository.getById(dto.getCourse_qaId()));
+
         return commentRepository.save(comment);
     }
 
