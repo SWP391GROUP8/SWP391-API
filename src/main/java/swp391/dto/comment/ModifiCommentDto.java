@@ -7,5 +7,5 @@ public class ModifiCommentDto {
     private String content;
     private String userId;
     private Long blogId;
-    private Long couurse_qaId;
+    private Long course_qaId;
 }
