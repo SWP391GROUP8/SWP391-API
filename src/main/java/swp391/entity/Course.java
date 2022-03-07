@@ -47,11 +47,5 @@ public class Course {
     @JsonIgnore
     private Set<Course_Resource> course_resources = new HashSet<>();
 
-    // relationship course - file: N - N
-    @JsonIgnore
-    @Builder.Default
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinTable(name = "course_file", joinColumns = @JoinColumn(name = "course_id"), inverseJoinColumns = @JoinColumn(name = "file_id"))
-    private Set<File> files = new HashSet<>();
 
 }

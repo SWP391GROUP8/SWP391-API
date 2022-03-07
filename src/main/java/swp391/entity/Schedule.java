@@ -38,6 +38,8 @@ public class Schedule {
     private LocalDate endTime;
     @Column
     private String createdBy;
+    @Column
+    private String status;
 
     // relationship user - schedule: N-N
     @JsonIgnore

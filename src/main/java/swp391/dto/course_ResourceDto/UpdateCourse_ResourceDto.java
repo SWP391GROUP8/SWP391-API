@@ -6,5 +6,6 @@ import lombok.Data;
 public class UpdateCourse_ResourceDto {
     private Long id;
     private String content;
+    private Long fileId;
     private String courseId;
 }

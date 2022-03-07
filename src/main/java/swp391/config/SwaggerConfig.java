@@ -28,7 +28,7 @@ public class SwaggerConfig {
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder().title("~~~")
                 .description("~~~")
-                .contact(new Contact("", "https://github.com/SWP391GROUP8/SWP391-API", "")).license("MIT2").build();
+                .contact(new Contact("", "https://github.com/SWP391GROUP8", "")).license("MIT2").build();
     }
 
     private ApiKey apiKey() {// Apikey la ten header
