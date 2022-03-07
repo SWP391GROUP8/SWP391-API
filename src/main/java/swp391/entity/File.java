@@ -34,7 +34,7 @@ public class File {
     private String path;
     //relationship file - course_Resource: 1-1
     @OneToOne(mappedBy = "file", fetch = FetchType.LAZY)
-  @JsonIgnore
+    @JsonIgnore
     private Course_Resource course_resource;
 
 }
