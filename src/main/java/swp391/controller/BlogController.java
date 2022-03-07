@@ -4,11 +4,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import swp391.dto.blog.ModifiBlogDto;
 import swp391.dto.blog.UpdateBlogDto;
-import swp391.dto.course.CreateCourseDto;
 import swp391.entity.Blog;
-import swp391.entity.Course;
 import swp391.service.BlogService;
-
 import java.util.List;
 
 @RestController
