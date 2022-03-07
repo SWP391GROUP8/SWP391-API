@@ -1,22 +1,23 @@
-package swp391.service;
+package swp391.service.impl;
 
-import com.amazonaws.AmazonServiceException;
+
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.*;
-import com.amazonaws.util.IOUtils;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import swp391.repository.FileRepository;
+import swp391.service.FileService;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
+
 import java.time.LocalDate;
 import java.util.Date;
-import java.util.Map;
-import java.util.Optional;
+import java.util.List;
+
 
 @Service
 public class FileServiceImpl implements FileService {
@@ -39,7 +40,7 @@ public class FileServiceImpl implements FileService {
             String fileName = generateFileName(multipartFile);
             String fileUrl = endpointUrl + "/" + bucketName + "/" + fileName;
             uploadFileTos3bucket(fileName, file);
-            file.delete();
+            file.delete();// xóa folder chứa file cần up
             newFile.setCreateDAte(LocalDate.now());
             newFile.setName(multipartFile.getOriginalFilename());
             newFile.setPath(fileUrl);
@@ -49,6 +50,22 @@ public class FileServiceImpl implements FileService {
         }
         return fileRepository.save(newFile);
     }
+
+    @Override
+    public List<swp391.entity.File> getAll() {
+        return fileRepository.findAll();
+    }
+
+    @Override
+    public swp391.entity.File getById(Long id) {
+        return fileRepository.getById(id);
+    }
+
+    @Override
+    public boolean isExisted(Long fileId) {
+        return fileRepository.existsById(fileId);
+    }
+
 
     private File convertMultiPartToFile(MultipartFile file) throws IOException {
         File convFile = new File(file.getOriginalFilename());

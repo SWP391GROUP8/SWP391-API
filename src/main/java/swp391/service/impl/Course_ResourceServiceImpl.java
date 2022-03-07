@@ -6,6 +6,7 @@ import swp391.dto.course_ResourceDto.UpdateCourse_ResourceDto;
 import swp391.entity.Course_Resource;
 import swp391.repository.CourseRepository;
 import swp391.repository.Course_ResourceRepository;
+import swp391.repository.FileRepository;
 import swp391.service.Course_ResourceService;
 
 import java.util.List;
@@ -14,10 +15,12 @@ import java.util.List;
 public class Course_ResourceServiceImpl implements Course_ResourceService {
     private Course_ResourceRepository course_resourceRepository;
     private CourseRepository courseRepository;
+    private FileRepository fileRepository;
 
-    public Course_ResourceServiceImpl(Course_ResourceRepository course_resourceRepository, CourseRepository courseRepository) {
+    public Course_ResourceServiceImpl(FileRepository fileRepository,Course_ResourceRepository course_resourceRepository, CourseRepository courseRepository) {
         this.course_resourceRepository = course_resourceRepository;
         this.courseRepository = courseRepository;
+        this.fileRepository=fileRepository;
     }
 
     @Override
@@ -30,6 +33,7 @@ public class Course_ResourceServiceImpl implements Course_ResourceService {
         Course_Resource course_resource = new Course_Resource();
         course_resource.setContent(dto.getContent());
         course_resource.setCourse(courseRepository.getById(dto.getCourseId()));
+        course_resource.setFile(fileRepository.getById(dto.getFileId()));
         return course_resourceRepository.save(course_resource);
     }
 
@@ -49,6 +53,7 @@ public class Course_ResourceServiceImpl implements Course_ResourceService {
         Course_Resource course_resource = course_resourceRepository.getById(dto.getId());
         course_resource.setContent(dto.getContent());
         course_resource.setCourse(courseRepository.getById(dto.getCourseId()));
+        course_resource.setFile(fileRepository.getById(dto.getFileId()));
         return course_resourceRepository.save(course_resource);
     }
 }

@@ -1,5 +1,6 @@
 package swp391.service;
 
+import swp391.dto.course.AddFileDto;
 import swp391.dto.course.CreateCourseDto;
 import swp391.entity.Course;
 
@@ -17,4 +18,6 @@ public interface CourseService {
     void delete(String id);
 
     Course getById(String id);
+
+
 }

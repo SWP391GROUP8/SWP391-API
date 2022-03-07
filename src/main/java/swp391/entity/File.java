@@ -3,10 +3,8 @@ package swp391.entity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.apache.http.annotation.Contract;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -15,7 +13,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Builder
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonIgnoreProperties(value = {"applications", "hibernateLazyInitializer"})
@@ -33,12 +32,9 @@ public class File {
     private LocalDate createDAte;
     @Column
     private String path;
-
-    // relationship course - file: N - N
-    @JsonIgnore
-    @Builder.Default
-    @ManyToMany(mappedBy = "files", fetch = FetchType.LAZY)
-    private Set<Course> courses = new HashSet<>();
-
+    //relationship file - course_Resource: 1-1
+    @OneToOne(mappedBy = "file", fetch = FetchType.LAZY)
+  @JsonIgnore
+    private Course_Resource course_resource;
 
 }
