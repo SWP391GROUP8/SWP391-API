@@ -29,6 +29,8 @@ public class Blog {
     private String status;
     @Column
     private int reaction;
+    @Column
+    private String author;
     // relationship blog - comment: 1 - N
     @OneToMany(mappedBy = "blog")
     @JsonIgnore

@@ -64,4 +64,9 @@ private FileService fileService;
         Course_Resource course_resource = course_resourceService.getById(id);
         return ResponseEntity.ok().body(course_resource);
     }
+    @GetMapping("/get-by-course-id")
+    private ResponseEntity getByCourseId(@RequestParam String id) {
+        List<Course_Resource> course_resource = course_resourceService.getByCourseId(id);
+        return ResponseEntity.ok().body(course_resource);
+    }
 }

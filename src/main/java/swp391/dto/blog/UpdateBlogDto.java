@@ -11,6 +11,6 @@ public class UpdateBlogDto {
     private String content;
 
     private String status;
-
+    private String author;
     private int reaction;
 }

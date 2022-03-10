@@ -36,6 +36,7 @@ public class BlogServiceImpl implements BlogService {
         blog.setStatus(dto.getStatus());
         blog.setReaction(dto.getReaction());
         blog.setTitle(dto.getTitle());
+        blog.setAuthor(dto.getAuthor());
         return blogRepository.save(blog);
     }
 
@@ -46,6 +47,7 @@ public class BlogServiceImpl implements BlogService {
         blog.setStatus(dto.getStatus());
         blog.setReaction(dto.getReaction());
         blog.setTitle(dto.getTitle());
+        blog.setAuthor(dto.getAuthor());
         return blogRepository.save(blog);
     }
 

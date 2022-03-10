@@ -22,4 +22,6 @@ public interface ScheduleService {
     void addUser(AddUserDto dto);
 
     void approve(String scheduleId);
+
+    List<Schedule> getByCourseId(String id);
 }
