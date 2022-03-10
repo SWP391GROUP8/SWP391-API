@@ -56,4 +56,9 @@ public class Course_ResourceServiceImpl implements Course_ResourceService {
         course_resource.setFile(fileRepository.getById(dto.getFileId()));
         return course_resourceRepository.save(course_resource);
     }
+
+    @Override
+    public List<Course_Resource> getByCourseId(String id) {
+        return course_resourceRepository.getCourse_ResourcesByCourse_Id(id);
+    }
 }

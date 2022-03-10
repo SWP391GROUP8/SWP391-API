@@ -25,6 +25,7 @@ public class Course_Resource {
     @Column
     private String content;
 
+
     // relationship course - course_Resource: 1 - N
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "course_id")

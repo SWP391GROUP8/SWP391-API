@@ -58,6 +58,11 @@ public class ScheduleController {
         Schedule schedule = scheduleService.getById(id);
         return ResponseEntity.ok().body(schedule);
     }
+    @GetMapping("/get-by-course-id")
+    private ResponseEntity getByCourseId(@RequestParam String id) {
+        List<Schedule> schedule = scheduleService.getByCourseId(id);
+        return ResponseEntity.ok().body(schedule);
+    }
 
     @PostMapping("/add-user")
     public Object addUserToSchedule(@RequestBody AddUserDto dto) {

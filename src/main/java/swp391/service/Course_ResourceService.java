@@ -16,4 +16,6 @@ public interface Course_ResourceService {
     Course_Resource getById(Long id);
 
     Course_Resource update(UpdateCourse_ResourceDto dto);
+
+    List<Course_Resource> getByCourseId(String id);
 }

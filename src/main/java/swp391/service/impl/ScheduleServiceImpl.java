@@ -90,4 +90,9 @@ public class ScheduleServiceImpl implements ScheduleService {
         schedule.setStatus("Approved");
         scheduleRepository.save(schedule);
     }
+
+    @Override
+    public List<Schedule> getByCourseId(String id) {
+        return scheduleRepository.getAllByCourse(id);
+    }
 }
