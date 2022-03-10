@@ -26,4 +26,7 @@ public class CreateScheduleDto {
     private LocalDate endTime;
 
     private String createdBy;
+
+    private String status;
+    private String courseId;
 }
