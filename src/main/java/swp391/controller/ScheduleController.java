@@ -73,4 +73,9 @@ public class ScheduleController {
         scheduleService.addUser(dto);
         return ResponseEntity.ok().body("Add successful");
     }
+    @PutMapping("/approve")
+    public Object approve(@RequestParam String scheduleId){
+        scheduleService.approve(scheduleId);
+        return ResponseEntity.ok().body("Successful");
+    }
 }

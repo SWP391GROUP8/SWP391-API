@@ -48,12 +48,15 @@ public class Schedule {
     private Set<User> users = new HashSet<>();
 
 
-    // relationship schedule - course: N - N
-    @JsonIgnore
-    @Builder.Default
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinTable(name = "schedule_course", joinColumns = @JoinColumn(name = "schedule_id"), inverseJoinColumns = @JoinColumn(name = "course_id"))
-    private Set<Course>  courses= new HashSet<>();
+    // relationship course - schedule: 1 - N
+//    @JsonIgnore
+//    @Builder.Default
+//    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+//    @JoinTable(name = "schedule_course", joinColumns = @JoinColumn(name = "schedule_id"), inverseJoinColumns = @JoinColumn(name = "course_id"))
+//    private Set<Course>  courses= new HashSet<>();
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "course_id")
+    private Course course;
 
     //helper
     public void addUser(User user) {

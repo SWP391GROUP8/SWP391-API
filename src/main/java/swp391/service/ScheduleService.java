@@ -20,4 +20,6 @@ public interface ScheduleService {
     Schedule getById(String id);
 
     void addUser(AddUserDto dto);
+
+    void approve(String scheduleId);
 }

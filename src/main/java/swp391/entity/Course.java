@@ -31,12 +31,14 @@ public class Course {
     @Column
     private String status;
 
-    // relationship schedule - course: N - N
+    // relationship course - schedule: 1 - N
+//    @JsonIgnore
+//    @Builder.Default
+//    @ManyToMany(mappedBy = "courses", fetch = FetchType.LAZY)
+//    private Set<Schedule> schedules = new HashSet<>();
+    @OneToMany(mappedBy = "course")
     @JsonIgnore
-    @Builder.Default
-    @ManyToMany(mappedBy = "courses", fetch = FetchType.LAZY)
     private Set<Schedule> schedules = new HashSet<>();
-
     //relationship course - course_qa: 1 - N
     @OneToMany(mappedBy = "course")
     @JsonIgnore
