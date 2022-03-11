@@ -34,7 +34,7 @@ public class Course_Resource {
     //relationship file - course_Resource: 1-1
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "file_id")
-    @JsonIgnore
+    //@JsonIgnore
     private File file;
 
 
