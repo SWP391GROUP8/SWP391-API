@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
+import swp391.entity.util.DateUtils;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -21,8 +22,8 @@ public class Comment {
     @Column
     private String content;
     @Column
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
+    @DateTimeFormat(pattern = DateUtils.DATE_FORMAT)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = DateUtils.DATE_FORMAT)
     private LocalDate createDate;
 
     // relationship user - comment: 1 - N

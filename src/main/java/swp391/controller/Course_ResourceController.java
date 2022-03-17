@@ -24,13 +24,13 @@ private FileService fileService;
         this.fileService=fileService;
     }
 
-    @GetMapping
+    @GetMapping("/get-all")
     private ResponseEntity getAll() {
         List<Course_Resource> course_resourceList = course_resourceService.getAll();
         return ResponseEntity.ok().body(course_resourceList);
     }
 
-    @PostMapping
+    @PostMapping("/create-resourse")
     public ResponseEntity create(@RequestBody ModifiCourse_ResourceDto dto) {
 
         if (!courseService.isExisted(dto.getCourseId())) {

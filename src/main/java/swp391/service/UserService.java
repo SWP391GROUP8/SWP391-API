@@ -31,4 +31,8 @@ public interface UserService {
     boolean checkIfValidOldPassword(User user, String oldPassword);
 
     void changePassword(User user, String newPassword);
+
+    void reaction(String email, Long blogId);
+
+    Boolean isReaction(String email, Long blogId);
 }

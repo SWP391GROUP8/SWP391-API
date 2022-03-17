@@ -1,15 +1,13 @@
 package swp391.service.impl;
 
 import org.springframework.stereotype.Service;
-import swp391.dto.course.AddFileDto;
 import swp391.dto.course.CreateCourseDto;
 import swp391.entity.Course;
-import swp391.entity.File;
 import swp391.repository.CourseRepository;
-import swp391.repository.FileRepository;
 import swp391.service.CourseService;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class CourseServiceImpl implements CourseService {
@@ -60,6 +58,20 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public Course getById(String id) {
         return courseRepository.getById(id);
+    }
+
+    @Override
+    public void addPreCourse(String courseId, String preCourseId) {
+        Course course = courseRepository.getById(courseId);
+        Course preCourse=courseRepository.getById(preCourseId);
+        course.addPreCourse(preCourse);
+        courseRepository.save(course);
+    }
+
+    @Override
+    public Set<Course> getPreCourse(String courseId) {
+        return courseRepository.getById(courseId).getCourses();
+
     }
 
 

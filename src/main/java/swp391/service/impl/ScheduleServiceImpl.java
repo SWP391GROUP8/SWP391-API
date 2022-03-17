@@ -95,4 +95,9 @@ public class ScheduleServiceImpl implements ScheduleService {
     public List<Schedule> getByCourseId(String id) {
         return scheduleRepository.getAllByCourse(id);
     }
+
+    @Override
+    public List<Schedule> getByUserId(String email) {
+        return scheduleRepository.getByUserId(email);
+    }
 }

@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 import org.apache.http.annotation.Contract;
 import org.springframework.format.annotation.DateTimeFormat;
+import swp391.entity.util.DateUtils;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -27,8 +28,8 @@ public class File {
     @Column
     private String name;
     @Column
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
+    @DateTimeFormat(pattern = DateUtils.DATE_FORMAT)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = DateUtils.DATE_FORMAT)
     private LocalDate createDAte;
     @Column
     private String path;

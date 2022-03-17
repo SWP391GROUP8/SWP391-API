@@ -23,4 +23,6 @@ public interface BlogService {
     int reaction(Long blogId);
 
     List<Blog> ranking();
+
+
 }

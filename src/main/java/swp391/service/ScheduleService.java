@@ -3,6 +3,7 @@ package swp391.service;
 import swp391.dto.schedule.AddUserDto;
 import swp391.dto.schedule.CreateScheduleDto;
 import swp391.entity.Schedule;
+import swp391.entity.User;
 
 import java.util.List;
 
@@ -24,4 +25,6 @@ public interface ScheduleService {
     void approve(String scheduleId);
 
     List<Schedule> getByCourseId(String id);
+
+    List<Schedule> getByUserId(String email);
 }

@@ -56,12 +56,30 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.addFilterBefore(jwtAuthorizationFilter, UsernamePasswordAuthenticationFilter.class);
 
-
         http.csrf().disable();
-//        http.antMatcher("/api/**").authorizeRequests().
-//                antMatchers("/api/auth/login").permitAll().
-//                anyRequest().authenticated();
+//        login: /api/auth/login
+//        View Profile user: /api/user/get-by-id/{email}
+//        Edit Profile user: /api/user/update-user
+//        Register: /api/user/create-user
+//        View courses: /api/course/get-by-id, /api/course/get-all ???????????????????????/
+//        Manage blogs: /api/blog/**
+//         View course resources: /api/resource/get-all ?????????????????????????
+//         Manage courses: /api/course/**
+//         Manage user: /api/user/**
+//         Create resources in course: /api/resource/create-resourse
+//         Admin nhập lịch giảng viên: /api/schedule/add-user
+//         Ranking of blog: /api/blog/ranking
+//         Reply Q&A: /api/course-q&a/create-course-q&a
+//         Manage Q&A: /api/course-q&a/**
 
+
+//         http.authorizeRequests()
+//         .antMatchers("/api/auth/login", "/swagger-ui.html#/**", "/api/user/get-by-id/{email}", "/api/user/update-user").permitAll()
+//         .antMatchers("/api/blog/**", "/api/course-q&a/**", "/api/resource/**", "/api/course/get-all", "/api/file/**", "/api/job-posting/**", "/api/role/**", "/api/schedule/**", "/api/user/**").hasAnyAuthority("ROLE_ADMIN")
+//         .antMatchers("/api/user/**", "/api/resource/**", "/api/blog/**", "/api/course-q&a/**").hasAnyAuthority("ROLE_INSTRUCTORS", "ROLE_ADMIN")
+//         .antMatchers("/api/user/create-user", "/api/resource/**", "/api/blog/**", "/api/course-q&a/**", "/api/blog/ranking", "/api/blog/{blogId}").hasAnyAuthority("ROLE_STUDENT", "ROLE_ADMIN")// thiếu view course
+//         // .antMatchers("").hasAnyAuthority("ROLE_COMPANY","ROLE_ADMIN")
+//         .anyRequest().authenticated();
 
     }
 }

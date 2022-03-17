@@ -12,4 +12,7 @@ public interface ScheduleRepository extends JpaRepository<Schedule,String> {
 
     @Query("select s from Schedule s join s.course c where c.id=?1" )
     List<Schedule> getAllByCourse(String id);
+
+    @Query("select s from Schedule s join s.users u where u.email=?1" )
+    List<Schedule> getByUserId(String email);
 }

@@ -60,4 +60,5 @@ public class BlogController {
         List<Blog> blogList = blogService.ranking();
         return ResponseEntity.ok().body(blogList);
     }
+
 }
