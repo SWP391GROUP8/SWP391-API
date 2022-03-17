@@ -3,12 +3,9 @@ package swp391.controller;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import swp391.dto.comment.ModifiCommentDto;
-import swp391.dto.user.UpdateUserDto;
 import swp391.entity.Comment;
-import swp391.entity.User;
 import swp391.service.CommentService;
 import swp391.service.UserService;
-
 import java.util.List;
 
 @RestController

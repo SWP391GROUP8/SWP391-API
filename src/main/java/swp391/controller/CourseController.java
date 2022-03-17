@@ -10,6 +10,7 @@ import swp391.service.CourseService;
 import swp391.service.FileService;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/api/course")
@@ -30,7 +31,7 @@ public class CourseController {
         return ResponseEntity.ok().body(course);
     }
 
-    @GetMapping
+    @GetMapping("/get-all")
     private ResponseEntity getAll() {
         List<Course> courseList = courseService.getAll();
         return ResponseEntity.ok().body(courseList);
@@ -54,4 +55,15 @@ public class CourseController {
         return ResponseEntity.ok().body(course);
     }
 
+    @PostMapping("/add-preCourse")
+    private ResponseEntity addPreCourse(@RequestParam String courseId, @RequestParam String preCourseId) {
+        courseService.addPreCourse(courseId, preCourseId);
+        return ResponseEntity.ok().body("Successful");
+    }
+
+    @GetMapping("/get-PreCourse-by-course-id")
+    private ResponseEntity getPreCourse(@RequestParam String courseId) {
+        Set<Course> courseList=courseService.getPreCourse(courseId);
+        return ResponseEntity.ok().body(courseList);
+    }
 }

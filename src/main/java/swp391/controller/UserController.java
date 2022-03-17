@@ -27,7 +27,7 @@ public class UserController {
         this.roleService = roleService;
     }
 
-    @PostMapping
+    @PostMapping("/create-user")
     public Object createUser(@Valid @RequestBody CreateUserDto dto, BindingResult errors) {
         if (errors.hasErrors()) {
             return ResponseEntity.badRequest().body(errors.getAllErrors());
@@ -55,7 +55,7 @@ public class UserController {
         return ResponseEntity.ok().body(userList);
     }
 
-    @PutMapping
+    @PutMapping("/update-user")
     public ResponseEntity updateUser(@RequestBody UpdateUserDto dto) {
         if (!roleService.isExisted(dto.getRoleId())) {
             return ResponseEntity.badRequest().body("Role Id not found");
@@ -97,5 +97,14 @@ public class UserController {
         userService.changePassword(user, passwordDto.getNewPassword());
         return ResponseEntity.ok("Successful !");
     }
-
+    @PutMapping("/reaction")
+    private ResponseEntity reactionWW(@RequestParam String email, @RequestParam Long blogId){
+        userService.reaction(email,blogId);
+        return ResponseEntity.ok().body("Successful");
+    }
+    @GetMapping("/is-reaction")
+    private ResponseEntity isReaction(@RequestParam String email, @RequestParam Long blogId){
+        Boolean isReaction = userService.isReaction(email,blogId);
+        return ResponseEntity.ok().body(isReaction);
+    }
 }

@@ -8,6 +8,7 @@ import swp391.dto.user.CreateUserDto;
 import swp391.dto.user.UpdateUserDto;
 import swp391.entity.Role;
 import swp391.entity.User;
+import swp391.repository.BlogRepository;
 import swp391.repository.RoleRepository;
 import swp391.repository.UserRepository;
 import swp391.service.UserService;
@@ -18,11 +19,13 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
     private PasswordEncoder passwordEncoder;
+    private BlogRepository blogRepository;
     private RoleRepository roleRepository;
 
 
-    public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder, RoleRepository roleRepository) {
+    public UserServiceImpl(BlogRepository blogRepository,UserRepository userRepository, PasswordEncoder passwordEncoder, RoleRepository roleRepository) {
         this.userRepository = userRepository;
+        this.blogRepository=blogRepository;
         this.passwordEncoder = passwordEncoder;
         this.roleRepository = roleRepository;
     }
@@ -98,5 +101,17 @@ public class UserServiceImpl implements UserService {
     public void changePassword(User user, String newPassword) {
         user.setPassword(passwordEncoder.encode(newPassword));
         userRepository.save(user);
+    }
+
+    @Override
+    public void reaction(String email, Long blogId) {
+        User user = userRepository.getById(email);
+        user.addBlog(blogRepository.getById(blogId));
+        userRepository.save(user);
+    }
+
+    @Override
+    public Boolean isReaction(String email, Long blogId) {
+        return userRepository.getReaction(email,blogId);
     }
 }

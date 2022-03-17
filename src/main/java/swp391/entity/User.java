@@ -1,15 +1,20 @@
 package swp391.entity;
 
+import com.amazonaws.services.codegurureviewer.model.Reaction;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 import org.hibernate.annotations.Columns;
 import org.springframework.format.annotation.DateTimeFormat;
+import swp391.entity.util.DateUtils;
+import swp391.entity.util.UserBlog;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Builder
@@ -19,7 +24,7 @@ import java.util.Set;
 @AllArgsConstructor
 @Entity
 @JsonIgnoreProperties(value = {"applications", "hibernateLazyInitializer"})
-@Table(name = "table_user")
+@Table(name = "tbl_user")
 public class User {
     @Id
     @Column
@@ -27,8 +32,8 @@ public class User {
     @Column
     private String name;
     @Column
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
+    @DateTimeFormat(pattern = DateUtils.DATE_FORMAT)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = DateUtils.DATE_FORMAT)
     private LocalDate birthDay;
     @Column
     private String phone;
@@ -62,4 +67,14 @@ public class User {
     @JsonIgnore
     private Set<JobPosting> jobPostings = new HashSet<>();
 
+    //
+    @OneToMany(mappedBy = "user", cascade = CascadeType.MERGE, orphanRemoval = true)
+    @JsonIgnore
+    private List<UserBlog> userBlogList = new ArrayList<>();
+    //
+    public void addBlog(Blog blog){
+        UserBlog userBlog = new UserBlog(this,blog,true);
+        userBlogList.add(userBlog);
+        blog.getUserBlogList().add(userBlog);
+    }
 }

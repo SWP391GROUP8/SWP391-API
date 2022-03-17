@@ -9,10 +9,14 @@ import java.util.Optional;
 
 @Repository
 public interface RoleRepository extends JpaRepository<Role, String> {
-    @Query("SELECT r from Role r where r.id =?1")
+    @Query("SELECT r " +
+            "from Role r " +
+            "where r.id =?1")
     Role findByRoleId(String id);
 
 
-    @Query("SELECT r.name from Role r join r.users u  where u.email=?1")
+    @Query("SELECT r.name " +
+            "from Role r join r.users u  " +
+            "where u.email=?1")
     String getRoleByEmail(String email);
 }

@@ -12,6 +12,8 @@ public interface CommentRepository extends JpaRepository<Comment,Long> {
 
     List<Comment> getCommentsByBlog_Id(Long blogId);
 
-    @Query("select c from Comment c where c.course_qa.id =?1")
+    @Query("select c " +
+            "from Comment c " +
+            "where c.course_qa.id =?1")
     List<Comment> getCommentsByQAId(Long qaId);
 }

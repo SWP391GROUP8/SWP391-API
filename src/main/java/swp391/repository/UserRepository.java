@@ -12,4 +12,7 @@ public interface UserRepository extends JpaRepository<User,String> {
 
     @Query("SELECT COUNT(u.email) FROM User u join u.schedules s WHERE s.id = ?1 AND u.email =?2")
     int findUserByScheduleIdAndUserId(String scheduleId, String userId);
+
+    @Query("SELECT bl.isReaction FROM User u join u.userBlogList bl join bl.blog b WHERE u.email = ?1 AND b.id =?2")
+    Boolean getReaction(String email,Long blogId);
 }

@@ -29,7 +29,7 @@ public class Course_QAController {
         return ResponseEntity.ok().body(course_qaList);
     }
 
-    @PostMapping
+    @PostMapping("/create-course-q&a")
     public ResponseEntity create(@RequestBody ModifiCourse_qa dto) {
 
         if (!courseService.isExisted(dto.getCourseId())) {

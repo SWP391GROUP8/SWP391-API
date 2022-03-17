@@ -5,17 +5,22 @@ import swp391.dto.blog.ModifiBlogDto;
 
 import swp391.dto.blog.UpdateBlogDto;
 import swp391.entity.Blog;
+import swp391.entity.User;
+import swp391.entity.util.UserBlog;
 import swp391.repository.BlogRepository;
+import swp391.repository.UserRepository;
 import swp391.service.BlogService;
 
 import java.util.List;
 
 @Service
 public class BlogServiceImpl implements BlogService {
-    private BlogRepository blogRepository;
+    private final BlogRepository blogRepository;
+    private UserRepository userRepository;
 
-    public BlogServiceImpl(BlogRepository blogRepository) {
+    public BlogServiceImpl(BlogRepository blogRepository,UserRepository userRepository) {
         this.blogRepository = blogRepository;
+        this.userRepository=userRepository;
     }
 
     @Override
@@ -31,7 +36,6 @@ public class BlogServiceImpl implements BlogService {
     @Override
     public Blog create(ModifiBlogDto dto) {
         Blog blog = new Blog();
-
         blog.setContent(dto.getContent());
         blog.setStatus(dto.getStatus());
         blog.setReaction(dto.getReaction());
@@ -65,7 +69,7 @@ public class BlogServiceImpl implements BlogService {
     public int reaction(Long blogId) {
         Blog blog = blogRepository.getById(blogId);
         int count = blog.getReaction();
-        count ++;
+        count++;
         blog.setReaction(count);
         blogRepository.save(blog);
         return blog.getReaction();
@@ -76,4 +80,6 @@ public class BlogServiceImpl implements BlogService {
         return blogRepository.countMostBlogsByReaction();
 
     }
+
+
 }
