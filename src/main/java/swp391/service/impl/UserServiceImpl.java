@@ -104,9 +104,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void reaction(String email, Long blogId) {
+    public void reaction(String email, Long blogId,Boolean isReaction) {
         User user = userRepository.getById(email);
-        user.addBlog(blogRepository.getById(blogId));
+        user.addBlog(blogRepository.getById(blogId),isReaction);
         userRepository.save(user);
     }
 
