@@ -72,8 +72,8 @@ public class User {
     @JsonIgnore
     private List<UserBlog> userBlogList = new ArrayList<>();
     //
-    public void addBlog(Blog blog){
-        UserBlog userBlog = new UserBlog(this,blog,true);
+    public void addBlog(Blog blog,Boolean isReaction){
+        UserBlog userBlog = new UserBlog(this,blog,isReaction);
         userBlogList.add(userBlog);
         blog.getUserBlogList().add(userBlog);
     }

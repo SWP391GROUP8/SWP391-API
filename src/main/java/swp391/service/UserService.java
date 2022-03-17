@@ -32,7 +32,7 @@ public interface UserService {
 
     void changePassword(User user, String newPassword);
 
-    void reaction(String email, Long blogId);
+    void reaction(String email, Long blogId,Boolean isReaction);
 
     Boolean isReaction(String email, Long blogId);
 }
