@@ -6,7 +6,7 @@ import swp391.entity.File;
 import java.util.List;
 
 public interface FileService {
-    File uploadFile(MultipartFile multipartFile);
+    File uploadFile(MultipartFile multipartFile,String email);
 
     List<File> getAll();
 
@@ -14,4 +14,7 @@ public interface FileService {
 
 
     boolean isExisted(Long fileId);
+
+
+    List<File> getByUserId(String email);
 }

@@ -48,12 +48,12 @@ public class BlogController {
         Blog blog = blogService.getById(id);
         return ResponseEntity.ok().body(blog);
     }
-
-    @PostMapping("/{blogId}")
-    private ResponseEntity reaction(@PathVariable Long blogId) {
-        int numOfReaction = blogService.reaction(blogId);
-        return ResponseEntity.ok().body(numOfReaction);
-    }
+//
+//    @PostMapping("/{blogId}")
+//    private ResponseEntity reaction(@RequestParam Long blogId,@RequestParam String email) {
+//        int numOfReaction = blogService.reaction(email,blogId);
+//        return ResponseEntity.ok().body(numOfReaction);
+//    }
 
     @GetMapping("/ranking")
     private ResponseEntity ranking() {

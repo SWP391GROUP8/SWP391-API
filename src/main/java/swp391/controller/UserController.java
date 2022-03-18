@@ -99,8 +99,8 @@ public class UserController {
     }
     @PutMapping("/reaction")
     private ResponseEntity reactionWW(@RequestParam String email, @RequestParam Long blogId,@RequestParam Boolean isReaction){
-        userService.reaction(email,blogId,isReaction);
-        return ResponseEntity.ok().body("Successful");
+       int reaction =  userService.reaction(email,blogId,isReaction);
+        return ResponseEntity.ok().body(reaction);
     }
     @GetMapping("/is-reaction")
     private ResponseEntity isReaction(@RequestParam String email, @RequestParam Long blogId){

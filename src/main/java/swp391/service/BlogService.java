@@ -20,7 +20,7 @@ public interface BlogService {
 
     Blog getById(Long id);
 
-    int reaction(Long blogId);
+    int reaction(String email,Long blogId);
 
     List<Blog> ranking();
 

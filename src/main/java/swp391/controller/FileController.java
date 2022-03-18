@@ -20,9 +20,9 @@ public class FileController {
     }
 
     @PostMapping("/upload")
-    public ResponseEntity uploadFile(@RequestPart(value = "file") MultipartFile file) {
+    public ResponseEntity uploadFile(@RequestPart(value = "file") MultipartFile file,String email) {
 
-        return ResponseEntity.ok().body(fileService.uploadFile(file));
+        return ResponseEntity.ok().body(fileService.uploadFile(file,email));
     }
 
     @GetMapping("/get-all")
@@ -30,10 +30,18 @@ public class FileController {
         List<File> fileList = fileService.getAll();
         return ResponseEntity.ok().body(fileList);
     }
+
     @GetMapping("/get-by-id/{id}")
     public ResponseEntity getById(@PathVariable Long id) {
         File file = fileService.getById(id);
         return ResponseEntity.ok().body(file);
     }
+
+    @GetMapping("/get-by-user-id")
+    public ResponseEntity getByUserId(@RequestParam String email) {
+        List<File> file = fileService.getByUserId(email);
+        return ResponseEntity.ok().body(file);
+    }
+
 
 }

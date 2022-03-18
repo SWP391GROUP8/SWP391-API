@@ -37,5 +37,8 @@ public class File {
     @OneToOne(mappedBy = "file", fetch = FetchType.LAZY)
     @JsonIgnore
     private Course_Resource course_resource;
-
+    // relationship user - file: 1-N
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;
 }

@@ -6,6 +6,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import swp391.dto.user.CreateUserDto;
 import swp391.dto.user.UpdateUserDto;
+import swp391.entity.Blog;
 import swp391.entity.Role;
 import swp391.entity.User;
 import swp391.repository.BlogRepository;
@@ -104,10 +105,23 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void reaction(String email, Long blogId,Boolean isReaction) {
+    public int reaction(String email, Long blogId,Boolean isReaction) {
         User user = userRepository.getById(email);
         user.addBlog(blogRepository.getById(blogId),isReaction);
         userRepository.save(user);
+        Blog blog = blogRepository.getById(blogId);
+        Boolean check = userRepository.getReaction(email, blogId);
+        int count = blog.getReaction();
+        if (check == true) {
+            count++;
+            blog.setReaction(count);
+            blogRepository.save(blog);
+        } else {
+            count--;
+            blog.setReaction(count);
+            blogRepository.save(blog);
+        }
+        return blog.getReaction();
     }
 
     @Override
