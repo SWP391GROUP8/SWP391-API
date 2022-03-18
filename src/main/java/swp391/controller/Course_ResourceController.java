@@ -17,11 +17,12 @@ import java.util.List;
 public class Course_ResourceController {
     private Course_ResourceService course_resourceService;
     private CourseService courseService;
-private FileService fileService;
-    public Course_ResourceController(FileService fileService,Course_ResourceService course_resourceService, CourseService courseService) {
+    private FileService fileService;
+
+    public Course_ResourceController(FileService fileService, Course_ResourceService course_resourceService, CourseService courseService) {
         this.course_resourceService = course_resourceService;
         this.courseService = courseService;
-        this.fileService=fileService;
+        this.fileService = fileService;
     }
 
     @GetMapping("/get-all")
@@ -36,7 +37,7 @@ private FileService fileService;
         if (!courseService.isExisted(dto.getCourseId())) {
             return ResponseEntity.badRequest().body("Course Id is not found");
         }
-        if(!fileService.isExisted(dto.getFileId())){
+        if (!fileService.isExisted(dto.getFileId())) {
             return ResponseEntity.badRequest().body("File Id is not found");
         }
         Course_Resource course_resource = course_resourceService.create(dto);
@@ -46,7 +47,7 @@ private FileService fileService;
 
     @PutMapping
     private ResponseEntity update(@RequestBody UpdateCourse_ResourceDto dto) {
-        if (!courseService.isExisted(dto.getCourseId())){
+        if (!courseService.isExisted(dto.getCourseId())) {
             return ResponseEntity.badRequest().body("Course Id is not found");
         }
         Course_Resource course_resource = course_resourceService.update(dto);
@@ -64,6 +65,7 @@ private FileService fileService;
         Course_Resource course_resource = course_resourceService.getById(id);
         return ResponseEntity.ok().body(course_resource);
     }
+
     @GetMapping("/get-by-course-id")
     private ResponseEntity getByCourseId(@RequestParam String id) {
         List<Course_Resource> course_resource = course_resourceService.getByCourseId(id);
