@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import swp391.repository.FileRepository;
+import swp391.repository.UserRepository;
 import swp391.service.FileService;
 
 import java.io.File;
@@ -27,13 +28,15 @@ public class FileServiceImpl implements FileService {
     @Value("${amazonProperties.bucketName}")
     private String bucketName;
     private FileRepository fileRepository;
+    private UserRepository userRepository;
 
-    public FileServiceImpl(AmazonS3 amazonS3, FileRepository fileRepository) {
+    public FileServiceImpl(UserRepository userRepository,AmazonS3 amazonS3, FileRepository fileRepository) {
         this.amazonS3 = amazonS3;
         this.fileRepository = fileRepository;
+        this.userRepository=userRepository;
     }
-
-    public swp391.entity.File uploadFile(MultipartFile multipartFile) {
+    @Override
+    public swp391.entity.File uploadFile(MultipartFile multipartFile,String email) {
         swp391.entity.File newFile = new swp391.entity.File();
         try {
             File file = convertMultiPartToFile(multipartFile);
@@ -44,6 +47,7 @@ public class FileServiceImpl implements FileService {
             newFile.setCreateDAte(LocalDate.now());
             newFile.setName(multipartFile.getOriginalFilename());
             newFile.setPath(fileUrl);
+            newFile.setUser(userRepository.getUserById(email));
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -64,6 +68,11 @@ public class FileServiceImpl implements FileService {
     @Override
     public boolean isExisted(Long fileId) {
         return fileRepository.existsById(fileId);
+    }
+
+    @Override
+    public List<swp391.entity.File> getByUserId(String email) {
+        return fileRepository.getFilesByUserId(email);
     }
 
 

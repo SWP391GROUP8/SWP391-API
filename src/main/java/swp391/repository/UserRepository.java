@@ -15,4 +15,7 @@ public interface UserRepository extends JpaRepository<User,String> {
 
     @Query("SELECT bl.isReaction FROM User u join u.userBlogList bl join bl.blog b WHERE u.email = ?1 AND b.id =?2")
     Boolean getReaction(String email,Long blogId);
+
+    @Query("SELECT u FROM User u  WHERE u.email=?1")
+    User getUserById(String id);
 }

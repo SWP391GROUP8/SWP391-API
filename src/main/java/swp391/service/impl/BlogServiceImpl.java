@@ -18,9 +18,9 @@ public class BlogServiceImpl implements BlogService {
     private final BlogRepository blogRepository;
     private UserRepository userRepository;
 
-    public BlogServiceImpl(BlogRepository blogRepository,UserRepository userRepository) {
+    public BlogServiceImpl(BlogRepository blogRepository, UserRepository userRepository) {
         this.blogRepository = blogRepository;
-        this.userRepository=userRepository;
+        this.userRepository = userRepository;
     }
 
     @Override
@@ -66,12 +66,20 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
-    public int reaction(Long blogId) {
+    public int reaction(String email, Long blogId) {
         Blog blog = blogRepository.getById(blogId);
+        Boolean isReaction = userRepository.getReaction(email, blogId);
         int count = blog.getReaction();
-        count++;
-        blog.setReaction(count);
-        blogRepository.save(blog);
+        if (isReaction == true) {
+            count++;
+            blog.setReaction(count);
+            blogRepository.save(blog);
+        } else {
+            count--;
+            blog.setReaction(count);
+            blogRepository.save(blog);
+        }
+
         return blog.getReaction();
     }
 

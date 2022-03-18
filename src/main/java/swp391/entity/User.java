@@ -67,10 +67,15 @@ public class User {
     @JsonIgnore
     private Set<JobPosting> jobPostings = new HashSet<>();
 
-    //
+    // relationship user - blog: N-N
     @OneToMany(mappedBy = "user", cascade = CascadeType.MERGE, orphanRemoval = true)
     @JsonIgnore
     private List<UserBlog> userBlogList = new ArrayList<>();
+
+    // relationship user - file: 1-N
+    @OneToMany(mappedBy = "user")
+    @JsonIgnore
+    private Set<File> files = new HashSet<>();
 
     //
     public void addBlog(Blog blog, Boolean isReaction) {
