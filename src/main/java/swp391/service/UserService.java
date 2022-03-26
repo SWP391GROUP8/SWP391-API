@@ -35,4 +35,6 @@ public interface UserService {
     int reaction(String email, Long blogId,Boolean isReaction);
 
     Boolean isReaction(String email, Long blogId);
+
+    List<User> getByScheduleId(String scheduleId);
 }

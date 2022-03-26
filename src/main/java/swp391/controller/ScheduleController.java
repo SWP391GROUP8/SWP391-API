@@ -1,14 +1,11 @@
 package swp391.controller;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import swp391.dto.schedule.AddUserDto;
 import swp391.dto.schedule.CreateScheduleDto;
 
 import swp391.entity.Schedule;
-import swp391.entity.User;
 import swp391.service.ScheduleService;
 import swp391.service.UserService;
 
@@ -79,6 +76,21 @@ public class ScheduleController {
         }
         scheduleService.addUser(dto);
         return ResponseEntity.ok().body("Add successful");
+    }
+
+    @PostMapping("/remove-user")
+    public Object removeUserToSchedule(@RequestBody AddUserDto dto) {
+        if (!scheduleService.isExisted(dto.getScheduleId())) {
+            return ResponseEntity.badRequest().body("Schedule Id is not found");
+        }
+        for (int i = 0; i < dto.getUserIdList().size(); i++) {
+            String userId = dto.getUserIdList().get(i);
+            if (!userService.findByScheduleIdAndUserId(dto.getScheduleId(), userId)) {
+                return ResponseEntity.badRequest().body("Email " + userId + " not found in this schedule");
+            }
+        }
+        scheduleService.removeUser(dto);
+        return ResponseEntity.ok().body("Remove successful");
     }
 
     @PutMapping("/approve")

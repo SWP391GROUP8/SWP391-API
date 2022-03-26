@@ -63,4 +63,9 @@ public class Schedule {
         user.getSchedules().add(this);
     }
 
+    public void removeUser(User user) {
+        users.remove(user);
+        user.getSchedules().remove(this);
+
+    }
 }

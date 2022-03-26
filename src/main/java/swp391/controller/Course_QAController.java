@@ -60,4 +60,9 @@ public class Course_QAController {
         Course_QA course_qa = course_qaService.getById(id);
         return ResponseEntity.ok().body(course_qa);
     }
+    @GetMapping("/get-by-course-id")
+    private ResponseEntity getByCourseId(@RequestParam String id) {
+        List<Course_QA> course_qa = course_qaService.getByCourseId(id);
+        return ResponseEntity.ok().body(course_qa);
+    }
 }

@@ -3,8 +3,9 @@ package swp391.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+import swp391.entity.Schedule;
 import swp391.entity.User;
-
+import java.util.List;
 @Repository
 public interface UserRepository extends JpaRepository<User,String> {
 
@@ -18,4 +19,7 @@ public interface UserRepository extends JpaRepository<User,String> {
 
     @Query("SELECT u FROM User u  WHERE u.email=?1")
     User getUserById(String id);
+
+    @Query("SELECT u FROM User u join u.schedules s WHERE s.id=?1")
+    List<User> getUsersByScheduleId(String id);
 }

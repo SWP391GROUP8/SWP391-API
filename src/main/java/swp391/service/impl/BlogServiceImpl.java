@@ -5,8 +5,6 @@ import swp391.dto.blog.ModifiBlogDto;
 
 import swp391.dto.blog.UpdateBlogDto;
 import swp391.entity.Blog;
-import swp391.entity.User;
-import swp391.entity.util.UserBlog;
 import swp391.repository.BlogRepository;
 import swp391.repository.UserRepository;
 import swp391.service.BlogService;
