@@ -9,6 +9,7 @@ import swp391.dto.user.ChangePasswordDto;
 import swp391.dto.user.CreateUserDto;
 import swp391.dto.user.PagingFormatUserDto;
 import swp391.dto.user.UpdateUserDto;
+import swp391.entity.Schedule;
 import swp391.entity.User;
 import swp391.service.RoleService;
 import swp391.service.UserService;
@@ -91,20 +92,28 @@ public class UserController {
         if (!userService.checkIfValidOldPassword(user, passwordDto.getOldPassword())) {
             return ResponseEntity.badRequest().body("Old password is wrong");
         }
-        if(!passwordDto.getNewPassword().equals(passwordDto.getComfirmNewPassword())){
+        if (!passwordDto.getNewPassword().equals(passwordDto.getComfirmNewPassword())) {
             return ResponseEntity.badRequest().body("New password not matches");
         }
         userService.changePassword(user, passwordDto.getNewPassword());
         return ResponseEntity.ok("Successful !");
     }
+
     @PutMapping("/reaction")
-    private ResponseEntity reactionWW(@RequestParam String email, @RequestParam Long blogId,@RequestParam Boolean isReaction){
-       int reaction =  userService.reaction(email,blogId,isReaction);
+    private ResponseEntity reactionWW(@RequestParam String email, @RequestParam Long blogId, @RequestParam Boolean isReaction) {
+        int reaction = userService.reaction(email, blogId, isReaction);
         return ResponseEntity.ok().body(reaction);
     }
+
     @GetMapping("/is-reaction")
-    private ResponseEntity isReaction(@RequestParam String email, @RequestParam Long blogId){
-        Boolean reaction = userService.isReaction(email,blogId);
+    private ResponseEntity isReaction(@RequestParam String email, @RequestParam Long blogId) {
+        Boolean reaction = userService.isReaction(email, blogId);
         return ResponseEntity.ok().body(reaction);
+    }
+
+    @GetMapping("/get-by-schedule-id/{scheduleId}")
+    private Object getByScheduleId(@PathVariable String scheduleId) {
+        List<User> userList = userService.getByScheduleId(scheduleId);
+        return ResponseEntity.ok().body(userList);
     }
 }

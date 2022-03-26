@@ -59,4 +59,9 @@ public class Course_QAServiceImpl implements Course_QAService {
     public Course_QA getById(Long id) {
         return course_qaRepository.getById(id);
     }
+
+    @Override
+    public List<Course_QA> getByCourseId(String id) {
+        return course_qaRepository.getAllByCourse_Id(id);
+    }
 }

@@ -1,6 +1,7 @@
 package swp391.service.impl;
 
 import org.springframework.stereotype.Service;
+import swp391.dto.comment.AddSubComment;
 import swp391.dto.comment.ModifiCommentDto;
 import swp391.entity.Comment;
 import swp391.repository.BlogRepository;
@@ -12,6 +13,7 @@ import swp391.service.Course_QAService;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class CommentServiceImpl implements CommentService {
@@ -20,11 +22,11 @@ public class CommentServiceImpl implements CommentService {
     private BlogRepository blogRepository;
     private Course_qaRepository course_qaRepository;
 
-    public CommentServiceImpl( Course_qaRepository course_qaRepository,CommentRepository commentRepository, UserRepository userRepository,BlogRepository blogRepository) {
+    public CommentServiceImpl(Course_qaRepository course_qaRepository, CommentRepository commentRepository, UserRepository userRepository, BlogRepository blogRepository) {
         this.commentRepository = commentRepository;
         this.userRepository = userRepository;
-        this.blogRepository=blogRepository;
-        this.course_qaRepository=course_qaRepository;
+        this.blogRepository = blogRepository;
+        this.course_qaRepository = course_qaRepository;
     }
 
     @Override
@@ -57,5 +59,21 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public List<Comment> getByQAId(Long qaId) {
         return commentRepository.getCommentsByQAId(qaId);
+    }
+
+    @Override
+    public void addSubComment(AddSubComment dto) {
+        Comment comment = commentRepository.getById(dto.getCommentId());
+        Comment subComment = comment.addSubComment(dto.getContentSubComment());
+        subComment.setUser(userRepository.getById(dto.getEmail()));
+        subComment.setBlog(blogRepository.findByBlogId(dto.getBlogId()));
+        subComment.setCourse_qa(course_qaRepository.findCourse_QAById(dto.getCourseQAId()));
+        commentRepository.save(comment);
+        commentRepository.save(subComment);
+    }
+
+    @Override
+    public Set<Comment> getSubCommentByCommentId(Long commentId) {
+        return commentRepository.getById(commentId).getSubComment();
     }
 }

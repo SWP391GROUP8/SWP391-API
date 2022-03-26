@@ -83,4 +83,10 @@ public class User {
         userBlogList.add(userBlog);
         blog.getUserBlogList().add(userBlog);
     }
+    public void removeSchedule(Schedule schedule) {
+        schedules.remove(schedule);
+        schedule.getUsers().remove(this);
+
+    }
+
 }

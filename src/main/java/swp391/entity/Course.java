@@ -59,7 +59,7 @@ public class Course {
 
     //  môn tiên quyết course - preCourse : N-N (self-referencing)
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-   @JsonIgnore
+    @JsonIgnore
     @JoinTable(name = "CourseWPreCourse",
             joinColumns = {@JoinColumn(name = "course_id")},
             inverseJoinColumns = {@JoinColumn(name = "preCourse_id")})
@@ -69,7 +69,7 @@ public class Course {
     @ManyToMany(mappedBy = "courses", fetch = FetchType.LAZY)
     private Set<Course> preCourse = new HashSet<>();
 
-    public void addPreCourse(Course preCourse){
+    public void addPreCourse(Course preCourse) {
         courses.add(preCourse);
         preCourse.getPreCourse().add(this);
     }

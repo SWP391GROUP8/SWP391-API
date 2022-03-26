@@ -15,9 +15,9 @@ import java.util.List;
 
 @Service
 public class ScheduleServiceImpl implements ScheduleService {
-    private ScheduleRepository scheduleRepository;
-    private UserRepository userRepository;
-    private CourseRepository courseRepository;
+    private final ScheduleRepository scheduleRepository;
+    private final UserRepository userRepository;
+    private final CourseRepository courseRepository;
 
     public ScheduleServiceImpl(CourseRepository courseRepository,ScheduleRepository scheduleRepository,UserRepository userRepository) {
         this.scheduleRepository = scheduleRepository;
@@ -99,5 +99,20 @@ public class ScheduleServiceImpl implements ScheduleService {
     @Override
     public List<Schedule> getByUserId(String email) {
         return scheduleRepository.getByUserId(email);
+    }
+
+    @Override
+    public void removeUser(AddUserDto dto) {
+        Schedule schedule = scheduleRepository.getById(dto.getScheduleId());
+        for (int i = 0; i < dto.getUserIdList().size(); i++) {
+            User user = userRepository.getById(dto.getUserIdList().get(i));
+            user.removeSchedule(schedule);
+            userRepository.save(user);
+        }
+//        User user = userRepository.getById(dto.getUserIdList());
+//        user.removeSchedule(schedule);
+
+//        userRepository.save(user);
+//        scheduleRepository.save(schedule);
     }
 }

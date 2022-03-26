@@ -128,4 +128,9 @@ public class UserServiceImpl implements UserService {
     public Boolean isReaction(String email, Long blogId) {
         return userRepository.getReaction(email,blogId);
     }
+
+    @Override
+    public List<User> getByScheduleId(String scheduleId) {
+        return userRepository.getUsersByScheduleId(scheduleId);
+    }
 }

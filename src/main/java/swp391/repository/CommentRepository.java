@@ -16,4 +16,6 @@ public interface CommentRepository extends JpaRepository<Comment,Long> {
             "from Comment c " +
             "where c.course_qa.id =?1")
     List<Comment> getCommentsByQAId(Long qaId);
+
+
 }

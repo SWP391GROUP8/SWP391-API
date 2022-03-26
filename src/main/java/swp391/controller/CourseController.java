@@ -63,7 +63,7 @@ public class CourseController {
 
     @GetMapping("/get-PreCourse-by-course-id")
     private ResponseEntity getPreCourse(@RequestParam String courseId) {
-        Set<Course> courseList=courseService.getPreCourse(courseId);
+        Set<Course> courseList = courseService.getPreCourse(courseId);
         return ResponseEntity.ok().body(courseList);
     }
 }
