@@ -14,6 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/course-q&a")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class Course_QAController {
     private Course_QAService course_qaService;
     private CourseService courseService;
