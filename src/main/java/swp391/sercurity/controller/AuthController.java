@@ -27,7 +27,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/auth")
-@CrossOrigin(origins = "*", allowedHeaders = "*")
+@CrossOrigin(origins = "http://localhost:4200")
 public class AuthController {
     private static final Logger logger = LoggerFactory.getLogger(Jwts.class);
     private final AuthenticationManager authenticationManager;
