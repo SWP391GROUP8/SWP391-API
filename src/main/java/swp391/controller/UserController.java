@@ -2,14 +2,13 @@ package swp391.controller;
 
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import swp391.dto.user.ChangePasswordDto;
 import swp391.dto.user.CreateUserDto;
 import swp391.dto.user.PagingFormatUserDto;
 import swp391.dto.user.UpdateUserDto;
-import swp391.entity.Schedule;
+
 import swp391.entity.User;
 import swp391.service.RoleService;
 import swp391.service.UserService;
@@ -19,7 +18,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/user")
-@CrossOrigin(origins = "*", allowedHeaders = "*")
+@CrossOrigin(origins = "http://localhost:4200")
 public class UserController {
     private UserService userService;
     private RoleService roleService;
