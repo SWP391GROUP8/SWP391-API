@@ -13,6 +13,7 @@ import java.util.Set;
 
 @RestController
 @RequestMapping("/api/comment")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class CommentController {
     private CommentService commentService;
     private UserService userService;

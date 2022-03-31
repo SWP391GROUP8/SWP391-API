@@ -14,6 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/schedule")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class ScheduleController {
     private ScheduleService scheduleService;
     private UserService userService;

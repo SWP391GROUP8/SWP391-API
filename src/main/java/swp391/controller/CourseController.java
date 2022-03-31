@@ -14,6 +14,7 @@ import java.util.Set;
 
 @RestController
 @RequestMapping("/api/course")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class CourseController {
     private CourseService courseService;
 
