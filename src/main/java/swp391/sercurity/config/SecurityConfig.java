@@ -77,7 +77,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //         Reply Q&A: /api/course-q&a/create-course-q&a
 //         Manage Q&A: /api/course-q&a/**
 //         Reaction: /api/user/reaction
-// Job registration: /api/job-posting/
+//         Job registration: /api/job-posting/
 //        http.authorizeRequests()
 //                .antMatchers("/api/auth/login", "/swagger-ui.html#/**", "/api/user/get-by-id/{email}", "/api/user/update-user")
 //                .permitAll()

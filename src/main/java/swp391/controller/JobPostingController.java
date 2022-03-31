@@ -11,6 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/job-posting")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class JobPostingController {
     private JobPostingService jobPostingService;
     private UserService userService;

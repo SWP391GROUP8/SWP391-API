@@ -12,6 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/file")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class FileController {
     private FileService fileService;
 

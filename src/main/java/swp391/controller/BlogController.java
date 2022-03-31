@@ -10,6 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/blog")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class BlogController {
     private BlogService blogService;
 
