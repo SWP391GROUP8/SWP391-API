@@ -13,10 +13,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import swp391.entity.User;
 import swp391.repository.RoleRepository;
 import swp391.repository.UserRepository;
@@ -30,6 +27,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/auth")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class AuthController {
     private static final Logger logger = LoggerFactory.getLogger(Jwts.class);
     private final AuthenticationManager authenticationManager;

@@ -33,7 +33,7 @@ public class JobPostingController {
             return ResponseEntity.badRequest().body("Id is duplicated");
         }
         if (!userService.isExisted(dto.getUserId())) {
-            return ResponseEntity.badRequest().body("User Id not found");
+            return ResponseEntity.badRequest().body("Email not found");
         }
         JobPosting jobPosting = jobPostingService.create(dto);
 

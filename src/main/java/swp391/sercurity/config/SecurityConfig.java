@@ -13,9 +13,13 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import swp391.sercurity.jwt.JwtAuthorizationFilter;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
+import java.util.Collections;
 
 @Configuration
 @EnableWebSecurity
@@ -47,10 +51,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("*"));
-        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE"));
-        http.cors().configurationSource(request -> configuration.applyPermitDefaultValues());
+//        CorsConfiguration configuration = new CorsConfiguration();
+//        configuration.setAllowedOrigins(Arrays.asList("*"));
+//        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE"));
+//        http.cors().configurationSource(request -> configuration.applyPermitDefaultValues());
+        http.cors();
 
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
@@ -61,9 +66,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //        View Profile user: /api/user/get-by-id/{email}
 //        Edit Profile user: /api/user/update-user
 //        Register: /api/user/create-user
-//        View courses: /api/course/get-by-id, /api/course/get-all ???????????????????????/
+//        View courses: /api/course/get-by-id ?????????????????????????????????????????????
 //        Manage blogs: /api/blog/**
-//         View course resources: /api/resource/get-all ?????????????????????????
+//         View course resources: /api/resource/get-by-id
 //         Manage courses: /api/course/**
 //         Manage user: /api/user/**
 //         Create resources in course: /api/resource/create-resourse
@@ -71,15 +76,34 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //         Ranking of blog: /api/blog/ranking
 //         Reply Q&A: /api/course-q&a/create-course-q&a
 //         Manage Q&A: /api/course-q&a/**
+//         Reaction: /api/user/reaction
+// Job registration: /api/job-posting/
+//        http.authorizeRequests()
+//                .antMatchers("/api/auth/login", "/swagger-ui.html#/**", "/api/user/get-by-id/{email}", "/api/user/update-user")
+//                .permitAll()
+//                //
+//                .antMatchers("/api/resource/get-by-id", "/api/blog/**", "/api/course/**", "/api/user/**").
+//                hasAnyAuthority("ROLE_ADMIN")//"/api/course-q&a/**",  "/api/file/**", "/api/job-posting/**", "/api/role/**", "/api/schedule/**"
+//                //
+//                .antMatchers("/api/user/create-user","/api/course/get-by-id", "/api/user/reaction", "/api/resource/get-by-id", "/api/blog/**", "/api/course-q&a/create-course-q&a","/api/resource/create-resourse").
+//                hasAnyAuthority("ROLE_INSTRUCTORS")
+//                //
+//                .antMatchers("/api/course/get-by-id","/api/user/create-user", "/api/resource/get-by-id","/api/blog/**", "/api/course-q&a/**", "/api/blog/ranking").
+//                hasAnyAuthority("ROLE_STUDENT")
+//                //
+//                // .antMatchers("").
+//                // hasAnyAuthority("ROLE_COMPANY","ROLE_ADMIN")
+//                .anyRequest().authenticated();
 
+    }
 
-//         http.authorizeRequests()
-//         .antMatchers("/api/auth/login", "/swagger-ui.html#/**", "/api/user/get-by-id/{email}", "/api/user/update-user").permitAll()
-//         .antMatchers("/api/blog/**", "/api/course-q&a/**", "/api/resource/**", "/api/course/get-all", "/api/file/**", "/api/job-posting/**", "/api/role/**", "/api/schedule/**", "/api/user/**").hasAnyAuthority("ROLE_ADMIN")
-//         .antMatchers("/api/user/**", "/api/resource/**", "/api/blog/**", "/api/course-q&a/**").hasAnyAuthority("ROLE_INSTRUCTORS", "ROLE_ADMIN")
-//         .antMatchers("/api/user/create-user", "/api/resource/**", "/api/blog/**", "/api/course-q&a/**", "/api/blog/ranking", "/api/blog/{blogId}").hasAnyAuthority("ROLE_STUDENT", "ROLE_ADMIN")// thiếu view course
-//         // .antMatchers("").hasAnyAuthority("ROLE_COMPANY","ROLE_ADMIN")
-//         .anyRequest().authenticated();
-
+    @Bean
+    CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedOrigins(Arrays.asList("*"));
+        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE"));
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
     }
 }

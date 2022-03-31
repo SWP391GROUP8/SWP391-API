@@ -32,7 +32,6 @@ public class UserBlog {
         this.user=user;
         this.blog=blog;
         this.id = new UserBlogId(user.getEmail(),blog.getId());
-
         this.isReaction=isReaction;
     }
 }
