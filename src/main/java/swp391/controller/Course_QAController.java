@@ -2,7 +2,6 @@ package swp391.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import swp391.dto.blog.ModifiBlogDto;
 
 import swp391.dto.course_qa.ModifiCourse_qa;
 import swp391.dto.course_qa.UpdateCourse_qa;

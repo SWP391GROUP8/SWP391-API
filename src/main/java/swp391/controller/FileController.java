@@ -21,9 +21,9 @@ public class FileController {
     }
 
     @PostMapping("/upload")
-    public ResponseEntity uploadFile(@RequestPart(value = "file") MultipartFile file,String email) {
+    public ResponseEntity uploadFile(@RequestPart(value = "file") MultipartFile file, String email) {
 
-        return ResponseEntity.ok().body(fileService.uploadFile(file,email));
+        return ResponseEntity.ok().body(fileService.uploadFile(file, email));
     }
 
     @GetMapping("/get-all")
@@ -44,5 +44,9 @@ public class FileController {
         return ResponseEntity.ok().body(file);
     }
 
-
+    @DeleteMapping()
+    public ResponseEntity delete(@RequestParam Long id) {
+        fileService.deleteById(id);
+        return ResponseEntity.ok().body("Successful");
+    }
 }
