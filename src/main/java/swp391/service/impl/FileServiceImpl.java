@@ -75,6 +75,11 @@ public class FileServiceImpl implements FileService {
         return fileRepository.getFilesByUserId(email);
     }
 
+    @Override
+    public void deleteById(Long id) {
+        fileRepository.deleteById(id);
+    }
+
 
     private File convertMultiPartToFile(MultipartFile file) throws IOException {
         File convFile = new File(file.getOriginalFilename());

@@ -32,8 +32,8 @@ public class AuthController {
     private static final Logger logger = LoggerFactory.getLogger(Jwts.class);
     private final AuthenticationManager authenticationManager;
     private final JwtUtils jwtUtils;
-    private RoleRepository roleRepository;
-    private UserRepository userRepository;
+    private final RoleRepository roleRepository;
+    private final UserRepository userRepository;
 
 
     public AuthController(AuthenticationManager authManager, JwtUtils jwtUtils,RoleRepository roleRepository,UserRepository userRepository) {
